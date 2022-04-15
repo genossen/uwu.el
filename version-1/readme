@@ -1,0 +1,14 @@
+
+
+
+
+M-x load-file uwu-graphics.el
+M-x load-file uwu.el
+M-x ielm
+
+then:
+
+ELISP> (uwu--window-setup)
+ELISP> (adult-pet-gfx-lookup 'alignment 'skill 'genus)
+ELISP> (switch-pet-gfx 'alignment 'skill 'genus)
+ELISP> (one-frame-of-animation 'alignment 'skill 'genus)
