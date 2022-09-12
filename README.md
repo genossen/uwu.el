@@ -7,9 +7,19 @@
 
 Version 2.
 
+_Version 3 is currently under development, as of 2022-09-12._
+
 By: ~vidak
 
 => mailto:vidak@riseup.net vidak@riseup.net
+
+# DESCRIPTION
+
+This is a virtual pet for GNU Emacs. You can feed, clean, and play
+with your pet. There are, in all, 39 different 'evolutions' of pet.
+
+Looking after your pet well will make it live longer, and allow you to
+evolve into a final 'secret' pet species.
 
 # LICENCE
 
