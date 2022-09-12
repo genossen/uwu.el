@@ -119,9 +119,7 @@
 (defvar *total-points* 0)
 (defvar *hearts* 4.0)
 (defvar *toilet* 0)
-(defvar *hours-awake-asleep*
-  (list 0 0))
-(defvar *asleep* nil)
+
 ;; ┬┌┐┌┬┌┬┐
 ;; │││││ │ 
 ;; ┴┘└┘┴ ┴
@@ -192,9 +190,9 @@
 
 (defun one-frame-of-animation (total-points)
 
-  (blank-and-draw-frame (pet-gfx-lookup total-points)))
+  (blank-and-draw-frame-dev (pet-gfx-lookup total-points)))
 
-(defun blank-and-draw-frame (pet-gfx)
+(defun blank-and-draw-frame-dev (pet-gfx)
   (set-buffer "*uwu*")
   (erase-buffer)
   (pet-movement pet-gfx))
@@ -243,34 +241,11 @@
   (one-frame-of-animation *total-points*))
 
 (defun uwu-needs ()
-  (run-with-timer +fifteen-minutes+ +fifteen-minutes+ #'randomly-allocate-needs))
+  (run-with-timer +five-minutes+ +five-minutes+ #'randomly-allocate-needs))
 
-(defun uwu-day-night-cycle ()
-  (run-with-timer +one-hour+ +one-hour+ #'circadian-rhythm))
+;; (defun uwu-ablute ()
+;;  (run-with-idle-timer +twenty-minutes+ +twenty-minutes+ #'uwu-toilet))
 
-(defun points-to-hours-asleep (total-points)
-  (dolist (points +pet-evolution-tree+)
-    (if (> (car points) total-points)
-	(return
-	 (nth 2
-	  (assoc (car points) +pet-evolution-tree+))))))
-
-(defun circadian-rhythm (hours-asleep)
-  (while (not *asleep*)
-    (incf (nth 0 *hours-awake-asleep*))
-    (if	(= (- 24 hours-asleep)
-	   (nth 0 *hours-awake-asleep*))
-	(setf *asleep* 't)
-      (setf (nth 0 *hours-awake-asleep*) 0)))
-  (while *asleep*
-    (incf (nth 1 *hours-awake-asleep*))
-    (if
-	(= hours-asleep (nth 1 *hours-awake-asleep*))
-	(setf *asleep* nil)
-      (setf (nth 1 *hours-awake-asleep*) 0))))
-
-
-  
 ;; ┬ ┬┌─┐┌─┐┬─┐ 
 ;; │ │└─┐├┤ ├┬┘ 
 ;; └─┘└─┘└─┘┴└─ 

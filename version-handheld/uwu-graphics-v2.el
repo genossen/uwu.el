@@ -28,58 +28,57 @@
 
 (defconst +pet-evolution-tree+
   (list
-   ;; '(total-points +graphics+ +hours-asleep+)
-   '(0 +egg+ 0) ; EGG PHASE
+   '(0 +egg+) ; EGG PHASE
    
-   '(10 +babby-chaotic+ 16) ; BABBY PHASE
-   '(20 +babby-lawful+ 16)
+   '(10 +babby-chaotic+) ; BABBY PHASE
+   '(20 +babby-lawful+)
    
-   '(30 +child-loud+ 12) ; CHILD PHASE
-   '(40 +child-normie+ 12)
-   '(50 +child-funny+ 12)
-   '(60 +child-active+ 12)
+   '(30 +child-loud+) ; CHILD PHASE
+   '(40 +child-normie+)
+   '(50 +child-funny+)
+   '(60 +child-active+)
    
-   '(70 +teen-chaotic-loud+ 10) ; TEEN PHASE
-   '(80 +teen-chaotic-normie+ 10)
-   '(90 +teen-chaotic-funny+ 10)
-   '(100 +teen-chaotic-active+ 10)
+   '(70 +teen-chaotic-loud+) ; TEEN PHASE
+   '(80 +teen-chaotic-normie+)
+   '(90 +teen-chaotic-funny+)
+   '(100 +teen-chaotic-active+)
 
-   '(110 +teen-lawful-loud+ 8)
-   '(120 +teen-lawful-normie+ 8)
-   '(130 +teen-lawful-funny+ 8)
-   '(140 +teen-lawful-active+ 8)
+   '(110 +teen-lawful-loud+)
+   '(120 +teen-lawful-normie+)
+   '(130 +teen-lawful-funny+)
+   '(140 +teen-lawful-active+)
 
-   '(150 +adult-chaotic-loud-social+ 8) ; ADULT PHASE
-   '(160 +adult-chaotic-loud-smart+ 8)
-   '(170 +adult-chaotic-loud-creative+ 8)
+   '(150 +adult-chaotic-loud-social+) ; ADULT PHASE
+   '(160 +adult-chaotic-loud-smart+)
+   '(170 +adult-chaotic-loud-creative+)
    
-   '(180 +adult-chaotic-normie-social+ 10)
-   '(190 +adult-chaotic-normie-smart+ 10)
-   '(200 +adult-chaotic-normie-creative+ 10)
+   '(180 +adult-chaotic-normie-social+)
+   '(190 +adult-chaotic-normie-smart+)
+   '(200 +adult-chaotic-normie-creative+)
    
-   '(210 +adult-chaotic-funny-social+ 8)
-   '(220 +adult-chaotic-funny-smart+ 8)
-   '(230 +adult-chaotic-funny-creative+ 8)
+   '(210 +adult-chaotic-funny-social+)
+   '(220 +adult-chaotic-funny-smart+)
+   '(230 +adult-chaotic-funny-creative+)
    
-   '(240 +adult-chaotic-active-social+ 6)
-   '(250 +adult-chaotic-active-smart+ 6)
-   '(260 +adult-chaotic-active-creative+ 6)
+   '(240 +adult-chaotic-active-social+)
+   '(250 +adult-chaotic-active-smart+)
+   '(260 +adult-chaotic-active-creative+)
 
-   '(270 +adult-lawful-loud-social+ 8)
-   '(280 +adult-lawful-loud-smart+ 8)
-   '(290 +adult-lawful-loud-creative+ 8)
+   '(270 +adult-lawful-loud-social+)
+   '(280 +adult-lawful-loud-smart+)
+   '(290 +adult-lawful-loud-creative+)
    
-   '(300 +adult-lawful-normie-social+ 10)
-   '(310 +adult-lawful-normie-smart+ 10)
-   '(320 +adult-lawful-normie-creative+ 10)
+   '(300 +adult-lawful-normie-social+)
+   '(310 +adult-lawful-normie-smart+)
+   '(320 +adult-lawful-normie-creative+)
    
-   '(330 +adult-lawful-funny-social+ 8)
-   '(340 +adult-lawful-funny-smart+ 8)
-   '(350 +adult-lawful-funny-creative+ 8)
+   '(330 +adult-lawful-funny-social+)
+   '(340 +adult-lawful-funny-smart+)
+   '(350 +adult-lawful-funny-creative+)
    
-   '(360 +adult-lawful-active-social+ 6)
-   '(370 +adult-lawful-active-smart+ 6)
-   '(380 +adult-lawful-active-creative+ 6)))
+   '(360 +adult-lawful-active-social+)
+   '(370 +adult-lawful-active-smart+)
+   '(380 +adult-lawful-active-creative+)))
    
 ;;         ┌─┐┌─┐┌┬┐          
 ;;         ├─┘├┤  │           

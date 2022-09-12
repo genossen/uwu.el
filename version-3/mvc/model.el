@@ -1,94 +1,87 @@
 
-;;; ┬ ┬┬ ┬┬ ┬ ┌─┐┬  
-;;; │ │││││ │ ├┤ │  
-;;; └─┘└┴┘└─┘o└─┘┴─┘
+;; ╔╦╗╔═╗╔╦╗╔═╗╦  
+;; ║║║║ ║ ║║║╣ ║  
+;; ╩ ╩╚═╝═╩╝╚═╝╩═╝
 
-;; Version 2.
-;; By ~vidak.
+;; ┌─┐┌─┐┌┐┌┌─┐┌┬┐┌─┐┌┐┌┌┬┐┌─┐
+;; │  │ ││││└─┐ │ ├─┤│││ │ └─┐
+;; └─┘└─┘┘└┘└─┘ ┴ ┴ ┴┘└┘ ┴ └─┘
 
-;;; ************
-;;; * GRAPHICS *
-;;; ************
+(defconst +five-minutes+ (* 5 60))
+(defconst +fifteen-minutes+ (* 15 60))
+(defconst +twenty-minutes+ (* 20 60))
+(defconst +thirty-minutes+ (* 30 60))
+(defconst +one-hour+ (* 60 60))
+(defconst +one-day+ (* 24 +one-hour+))
 
-;; This program is free software: you can redistribute it and/or
-;; modify it under the terms of the GNU General Public License as
-;; published by the Free Software Foundation, either version 3 of the
-;; License, or (at your option) any later version.
+;; ┬  ┬┌─┐┬─┐┬┌─┐┌┐ ┬  ┌─┐┌─┐
+;; └┐┌┘├─┤├┬┘│├─┤├┴┐│  ├┤ └─┐
+;;  └┘ ┴ ┴┴└─┴┴ ┴└─┘┴─┘└─┘└─┘
 
-;; This program is distributed in the hope that it will be useful, but
-;; WITHOUT ANY WARRANTY; without even the implied warranty of
-;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
-;; General Public License for more details.
+(defvar *total-points* 0)
+(defvar *hearts* 4.0) ; this decreases with neglect
+(defvar *hungry* 0) ; this increases with hunger
+(defvar *toilet* 0) ; this increases with more poops
+(defvar *asleep* nil)
+(defvar *lights* nil)
+(defvar *attention* nil)
+(defvar *neglect* 0)
 
-;; You should have received a copy of the GNU General Public License
-;; along with this program. If not, see
-;; <https://www.gnu.org/licenses/>.
+;; ┌─┐┬─┐┌─┐┌─┐┬ ┬┬┌─┐┌─┐
+;; │ ┬├┬┘├─┤├─┘├─┤││  └─┐
+;; └─┘┴└─┴ ┴┴  ┴ ┴┴└─┘└─┘
 
-(provide 'uwu-graphics-v2)
+;; As the pet ages, it will evolve. The pet will move through the
+;; following life-cycle stages:
+;;
+;; 1. EGG
+;;
+;; 2. BABBY
+;;    - chaotic
+;;    - lawful
+;;
+;; 3. CHILD
+;;    - loud
+;;    - normie
+;;    - funny
+;;    - active
+;;
+;; 4. TEEN
+;;    - chaotic
+;;        . loud
+;;        . normie
+;;        . funny
+;;        . active
+;;    - lawful
+;;        . loud
+;;        . normie
+;;        . funny
+;;        . active
+;;
+;; 5. ADULT
+;;    - chaotic
+;;        . loud
+;;            ~ social
+;;            ~ smart
+;;            ~ creative
+;;        . normie
+;;            ~ social
+;;            ~ ...
+;;        . funny
+;;        . active
+;;    - lawful
+;;        . loud
+;;        . normie
+;;        . funny
+;;        . active
 
-(defconst +pet-evolution-tree+
-  (list
-   ;; '(total-points +graphics+ +hours-asleep+)
-   '(0 +egg+ 0) ; EGG PHASE
-   
-   '(10 +babby-chaotic+ 16) ; BABBY PHASE
-   '(20 +babby-lawful+ 16)
-   
-   '(30 +child-loud+ 12) ; CHILD PHASE
-   '(40 +child-normie+ 12)
-   '(50 +child-funny+ 12)
-   '(60 +child-active+ 12)
-   
-   '(70 +teen-chaotic-loud+ 10) ; TEEN PHASE
-   '(80 +teen-chaotic-normie+ 10)
-   '(90 +teen-chaotic-funny+ 10)
-   '(100 +teen-chaotic-active+ 10)
+;; ##################################################################
+;; #                             * EGG                              #
+;; ##################################################################
 
-   '(110 +teen-lawful-loud+ 8)
-   '(120 +teen-lawful-normie+ 8)
-   '(130 +teen-lawful-funny+ 8)
-   '(140 +teen-lawful-active+ 8)
+;; * one option possible
 
-   '(150 +adult-chaotic-loud-social+ 8) ; ADULT PHASE
-   '(160 +adult-chaotic-loud-smart+ 8)
-   '(170 +adult-chaotic-loud-creative+ 8)
-   
-   '(180 +adult-chaotic-normie-social+ 10)
-   '(190 +adult-chaotic-normie-smart+ 10)
-   '(200 +adult-chaotic-normie-creative+ 10)
-   
-   '(210 +adult-chaotic-funny-social+ 8)
-   '(220 +adult-chaotic-funny-smart+ 8)
-   '(230 +adult-chaotic-funny-creative+ 8)
-   
-   '(240 +adult-chaotic-active-social+ 6)
-   '(250 +adult-chaotic-active-smart+ 6)
-   '(260 +adult-chaotic-active-creative+ 6)
-
-   '(270 +adult-lawful-loud-social+ 8)
-   '(280 +adult-lawful-loud-smart+ 8)
-   '(290 +adult-lawful-loud-creative+ 8)
-   
-   '(300 +adult-lawful-normie-social+ 10)
-   '(310 +adult-lawful-normie-smart+ 10)
-   '(320 +adult-lawful-normie-creative+ 10)
-   
-   '(330 +adult-lawful-funny-social+ 8)
-   '(340 +adult-lawful-funny-smart+ 8)
-   '(350 +adult-lawful-funny-creative+ 8)
-   
-   '(360 +adult-lawful-active-social+ 6)
-   '(370 +adult-lawful-active-smart+ 6)
-   '(380 +adult-lawful-active-creative+ 6)))
-   
-;;         ┌─┐┌─┐┌┬┐          
-;;         ├─┘├┤  │           
-;;         ┴  └─┘ ┴           
-;; ┌┬┐┌─┐┌─┐┬┌┐┌┬┌┬┐┬┌─┐┌┐┌┌─┐
-;;  ││├┤ ├┤ │││││ │ ││ ││││└─┐
-;; ─┴┘└─┘└  ┴┘└┘┴ ┴ ┴└─┘┘└┘└─┘
-
-(defconst +egg+    ; EGG PHASE
+(defconst +egg+
   (list
    '(gfx
      "."
@@ -97,8 +90,17 @@
      "o"
      "O")
    '(name "egge")))
-   
-(defconst +babby-chaotic+ ; BABBY PHASE
+
+
+;; ##################################################################
+;; #                             * BABBY                            #
+;; ##################################################################
+
+;; * two options possible
+
+;; ** chaotic
+
+(defconst +babby-chaotic+ 
   (list
    '(gfx
      "( .◎. )" ;; forward
@@ -107,7 +109,9 @@
      "(_ ｡◎｡)_" ;; right-moving
      "_(｡◎｡ _)") ;; left-moving
    '(name "chaotic babby")))
-   
+
+;; ** lawful
+
 (defconst +babby-lawful+
   (list
    '(gfx
@@ -117,8 +121,16 @@
      "~:v" ;; right-moving
      "c:~") ;; left-moving
      '(name "lawful babby")))
-   
-(defconst +child-loud+ ;CHILD PHASE
+
+;; ##################################################################
+;; #                             * CHILD                            #
+;; ##################################################################
+
+;; * four options possible
+
+;; ** loud
+
+(defconst +child-loud+
   (list
    '(gfx
      "(＾▽＾)"
@@ -127,6 +139,8 @@
      "(>＾▽＾)>"
      "<(＾▽＾<)")
    '(name "loud child")))
+
+;; ** normie
 
 (defconst +child-normie+
   (list
@@ -138,6 +152,8 @@
      "<(^‿^✿<)")
    '(name "normie child")))
 
+;; ** funny
+
 (defconst +child-funny+
   (list
    '(gfx
@@ -147,6 +163,8 @@
      "☆( >。v °)>"
      "<(。v °< )☆")
    '(name "funny child")))
+
+;; ** active
 
 (defconst +child-active+
   (list
@@ -158,8 +176,16 @@
      "┌(o v o┌ )")
    '(name "active child")))
 
+;; ##################################################################
+;; #                             * TEEN                             #
+;; ##################################################################
 
-(defconst +teen-chaotic-loud+ ; TEEN PHASE
+;; * eight options possible
+
+;; ** chaotic
+;; *** loud
+
+(defconst +teen-chaotic-loud+ 
   (list
    '(gfx
        "(°□°)" ;; forward       
@@ -168,6 +194,8 @@
        "(╯°□°)╯" ;; right-moving       
        "╰(°□°╰)") ;; left-moving
    '(name "gekido")))
+
+;; *** normie
 
 (defconst +teen-chaotic-normie+
   (list
@@ -179,6 +207,8 @@
        "\\(<.<)") ;; left-moving
    '(name "henna")))
 
+;; *** funny
+
 (defconst +teen-chaotic-funny+
   (list
    '(gfx
@@ -188,6 +218,8 @@
        " (/¯o_°)/¯" ;; right-moving       
        " ¯\(°_o¯\)") ;; left-moving
    '(name "derp")))
+
+;; *** active
 
 (defconst +teen-chaotic-active+
   (list
@@ -199,6 +231,10 @@
        " ლ(•̀_•́ლ)") ;; left-moving
    '(name "hadena")))
 
+;; ** lawful
+
+;; *** loud
+
 (defconst +teen-lawful-loud+
   (list
    '(gfx
@@ -208,6 +244,8 @@
       "(>*°▽°*)>" ;; right-moving      
       "<(*°▽°*<)") ;; left-moving
    '(name "kagayaku")))
+
+;; *** normie
 
 (defconst +teen-lawful-normie+
   (list
@@ -219,6 +257,8 @@
       "<( u w u <)") ;; left-moving
    '(name "uwu")))
 
+;;; *** funny
+
 (defconst +teen-lawful-funny+
   (list
    '(gfx
@@ -228,6 +268,8 @@
       "(n˘v˘•)¬" ;; right-moving      
       "~(•˘v˘n)") ;; left-moving
    '(name "kirei")))
+
+;; *** active
 
 (defconst +teen-lawful-active+
   (list
@@ -239,9 +281,15 @@
       "<( o w o <)") ;; left-moving
    '(name "owo")))
 
+;; ##################################################################
+;; #                             * ADULT                            #
+;; ##################################################################
 
+;; ** chaotic
+;; *** loud
+;; **** social
 
-(defconst +adult-chaotic-loud-social+ ; ADULT PHASE
+(defconst +adult-chaotic-loud-social+ 
   (list
    '(gfx  
 	"＼(´◓ Д ◔)／" ;; forward	
@@ -250,6 +298,8 @@
 	"(／ ´◔ Д ◓)／" ;; right-moving	
 	"＼(´◓ Д ◔ ＼)") ;; left-moving
    '(name "sakebu")))
+
+;; **** smart
 
 (defconst +adult-chaotic-loud-smart+	  
   (list
@@ -261,6 +311,8 @@
       "Ψo(｀▽´ o)");; left-moving
    '(name "noroi")))
 
+;; **** creative
+
 (defconst +adult-chaotic-loud-creative+
   (list
    '(gfx
@@ -270,7 +322,10 @@
       "(> ﾟ Д ﾟ)>" ;; right-moving
       "<(ﾟ Д ﾟ <)");; left-moving
    '(name "osoroshii")))
-   
+
+;; *** normie
+;; **** social
+
 (defconst +adult-chaotic-normie-social+
   (list
    '(gfx
@@ -280,6 +335,8 @@
 	"(>⌐■_■)>" ;; right-moving	
 	"<(■_■¬<)");; left-moving
    '(name "kakkoii")))
+
+;; **** smart
 
 (defconst +adult-chaotic-normie-smart+
   (list
@@ -291,6 +348,8 @@
       "-(▼皿▼｡ -)");; left-moving
    '(name "kabuto")))
 
+;; **** creative
+
 (defconst +adult-chaotic-normie-creative+
   (list
    '(gfx
@@ -300,6 +359,9 @@
       "(∿*Φ ω Φ*)∿" ;; right-moving
       "∿(*Φ ω Φ*∿)");; left-moving
    '(name "neko")))
+
+;; *** funny
+;; **** social
 
 (defconst +adult-chaotic-funny-social+
   (list
@@ -311,6 +373,8 @@
      "ლ('ڡ'ლ)");; left-moving
    '(name "dorobo")))
 
+;; **** smart
+
 (defconst +adult-chaotic-funny-smart+
   (list
    '(gfx
@@ -320,6 +384,8 @@
       "(o ｀▽´ )oΨ" ;; right-moving
       "Ψo(｀▽´ o)");; left-moving
    '(name "noroi")))
+
+;; **** creative
 
 (defconst +adult-chaotic-funny-creative+
   (list
@@ -331,6 +397,9 @@
       "<(⊙_◎ <)");; left-moving
    '(name "yotta")))
 
+;; *** active
+;; **** social
+
 (defconst +adult-chaotic-active-social+
   (list
    '(gfx
@@ -340,6 +409,8 @@
 	"Ψ( ;Φ‿Φ)_↑" ;; right-moving	
 	"↑_(Φ‿Φ;)Ψ");; left-moving
    '(name "akuma")))
+
+;; **** smart
 
 (defconst +adult-chaotic-active-smart+
   (list
@@ -351,6 +422,8 @@
       "┗(ʘ∀ʘ๑)┐┘=3");; left-moving
    '(name "hashiru")))
 
+;; **** creative
+
 (defconst +adult-chaotic-active-creative+
   (list
    '(gfx
@@ -360,6 +433,10 @@
       "(ó ì_í)=ó" ;; right-moving
       "ò=(ì_í ò)");; left-moving
    '(name "osu")))
+
+;; ** lawful
+;; *** loud
+;; **** social
 
 (defconst +adult-lawful-loud-social+
   (list
@@ -371,6 +448,9 @@
       "~(≧∇≦ ~)");; left-moving
    '(name "warai")))
 
+;; *** loud
+;; **** smart
+
 (defconst +adult-lawful-loud-smart+
 (list
    '(gfx
@@ -380,6 +460,8 @@
       "( >▼∀▼)>" ;; right-moving
       "<(▼∀▼< )");; left-moving
    '(name "shittakaburi")))
+
+;; **** creative
 
 (defconst +adult-lawful-loud-creative+
 (list
@@ -391,6 +473,9 @@
        "<(。々° <)");; left-moving
    '(name "miotosu")))
 
+;; *** normie
+;; **** social
+
 (defconst +adult-lawful-normie-social+
 (list
    '(gfx
@@ -400,6 +485,8 @@
        "(/◕ヮ◕)/" ;; right-moving
        "\\(◕ヮ◕\\)");; left-moving
    '(name "yorokobi")))
+
+;; **** smart
 
 (defconst +adult-lawful-normie-smart+
 (list
@@ -411,6 +498,8 @@
        "<(´◡/‿◡`<)");; left-moving
    '(name "yoshoku")))
 
+;; **** creative
+
 (defconst +adult-lawful-normie-creative+
 (list
    '(gfx
@@ -420,7 +509,10 @@
        "@( >o･ω･)@>" ;; right-moving       
        "<@(･ω･o< )@");; left-moving
    '(name "saru")))
-  
+
+;; *** funny
+;; **** social
+
 (defconst +adult-lawful-funny-social+
 (list
    '(gfx
@@ -430,6 +522,8 @@
        "(> ●ᴥ●)>"  ;; right-moving
        "<(●ᴥ● <)") ;; left-moving
    '(name "inu")))
+
+;; **** smart
 
 (defconst +adult-lawful-funny-smart+
 (list
@@ -441,6 +535,8 @@
        "<(๑ÒωÓ๑< )");; left-moving
 '(name "otaku")))
 
+;; **** creative
+
 (defconst +adult-lawful-funny-creative+
 (list
    '(gfx
@@ -450,6 +546,9 @@
        "(/≧∀≦)/" ;; right-moving       
        "\\(≧∀≦\\)");; left-moving
    '(name "shifuku")))
+
+;; *** active
+;; **** social
 
 (defconst +adult-lawful-active-social+
 (list
@@ -461,6 +560,8 @@
        "✧<(-◡•́｡ <)") ;; left-moving
    '(name "keihaku")))
 
+;; **** smart
+
 (defconst +adult-lawful-active-smart+
 (list
    '(gfx
@@ -470,6 +571,8 @@
        "(☞ ° ͜ʖ °)☞" ;; right-moving       
 "☜( ° c͜ °☜)");; left-moving
    '(name "lenny")))
+
+;; **** creative
 
 (defconst +adult-lawful-active-creative+
   (list
@@ -481,90 +584,76 @@
        "<(ˆ⌣ˆc<)");; left-moving
    '(name "ureshii")))
 
-;; ┬ ┬┌─┐┌─┐┬─┐┌┬┐┌─┐
-;; ├─┤├┤ ├─┤├┬┘ │ └─┐
-;; ┴ ┴└─┘┴ ┴┴└─ ┴ └─┘
+;; ┌─┐┌─┐┌┬┐  ┌┬┐┌─┐┌┬┐┌─┐
+;; ├─┘├┤  │    ││├─┤ │ ├─┤
+;; ┴  └─┘ ┴   ─┴┘┴ ┴ ┴ ┴ ┴
 
-(defconst +four-hearts+
-"
-     ♥♥♥♥♥♥♥♥
-")
+;; ******************************* EGG ******************************
+;; egg is the initial life-cycle stage
+;; you, as it were, start with a blank sheet (:
+;; ******************************************************************
 
-(defconst +three-and-half-hearts+
-"
-     ♥♥♥♥♥♥♥♡
-")
+;; ****************************** BABBY *****************************
+;; the babby stage is RNG-ed between 'lawful' and 'chaotic'
+;; ******************************************************************
 
-(defconst +three-hearts+
-"
-     ♥♥♥♥♥♥♡♡
-")
+;; ****************************** CHILD *****************************
+;; the child phase is RNG-ed between 'normie', 'active', 'funny', and
+;; 'loud'. this is the phase you start looking after your pet.
+;; ******************************************************************
 
-(defconst +two-and-half-hearts+
-"
-     ♥♥♥♥♥♡♡♡
-")
+;; -*-
 
-(defconst +two-hearts+
-"
-     ♥♥♥♥♡♡♡♡
-")
+;; ****************************** TEEN ******************************
+;; lawful
+;;    normie -> 0
+;;    active -> 3
+;;    funny -> 0
+;;    loud -> 2
+;;
+;; chaotic
+;;    normie -> 1
+;;    active -> 3
+;;    funny -> 2
+;;    loud -> 3
+;; ******************************************************************
 
-(defconst +one-and-half-hearts+
-"
-     ♥♥♥♡♡♡♡♡
-")
+;; -*-
 
-(defconst +one-heart+
-"
-     ♥♥♡♡♡♡♡♡
-"
-)
-
-(defconst +half-heart+
-"
-     ♥♡♡♡♡♡♡♡
-")
-
-(defconst +zero-hearts+
-"
-     ♡♡♡♡♡♡♡♡
-
-hungry~!
-
-(don't forget to
-   M-x uwu-feed!)
-")
-
-
-;; ┌┬┐┌─┐┬┬  ┌─┐┌┬┐┌─┐
-;;  │ │ │││  ├┤  │ └─┐
-;;  ┴ └─┘┴┴─┘└─┘ ┴ └─┘
-
-(defconst +zero-toilets+
-"
-")
-
-(defconst +one-toilet+
-"
-       ς
-       Δ
-")
-
-(defconst +two-toilets+
-"
-       ς  ξ
-       Δ  Δ
-")
-
-(defconst +three-toilets+
-"
-       ς  ξ  ς
-       Δ  Δ  Δ
-")
-
-(defconst +four-toilets+
-  "
-       ς  ξ  ς  ξ  (don't forget to
-       Δ  Δ  Δ  Δ  M-x uwu-clean-up!)
-")
+;; ***************************** ADULT ******************************
+;;
+;;  chaotic
+;;    . loud
+;;        ~ social
+;;        ~ smart
+;;        ~ creative
+;;    . normie
+;;        ~ social
+;;        ~ smart
+;;        ~ creative
+;;    . funny
+;;        ~ social
+;;        ~ smart
+;;        ~ creative
+;;    . active
+;;        ~ social
+;;        ~ smart
+;;        ~ creative
+;;  lawful
+;;    . loud
+;;        ~ social -> nil
+;;        ~ smart -> nil
+;;        ~ creative -> 72
+;;    . normie
+;;        ~ social -> nil
+;;        ~ smart -> nil
+;;        ~ creative -> nil
+;;    . funny
+;;        ~ social -> nil
+;;        ~ smart -> nil
+;;        ~ creative -> nil
+;;    . active
+;;        ~ social -> 144
+;;        ~ smart -> 40
+;;        ~ creative -> nil
+;; ******************************************************************
