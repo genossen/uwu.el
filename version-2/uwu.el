@@ -30,6 +30,8 @@
 ;;      ││├─┤ │ ├─┤      
 ;;     ─┴┘┴ ┴ ┴ ┴ ┴   
 
+(load-file "uwu-graphics-v2.el")
+
 (require 'uwu-graphics-v2)
 
 ;; ┌┬┐┌─┐ ┬┌─┐┬─┐ 
@@ -127,7 +129,7 @@
 (defun uwu-init ()
   (setf *hearts* 4.0)
   (setf *toilet* 0)
-  (setf *total-points* -10)
+  (setf *total-points* 1)
   (get-buffer-create "*uwu*")
   (switch-to-buffer "*uwu*")
   (uwu-visualiser)
@@ -144,13 +146,13 @@
     (cond ((and 
 	    (= 3 rng-move)
 	    (> *movement* 0))
-	   (decf *movement*))       
+	   (cl-decf *movement*))       
 
 	  ((and
 	    (= 4 rng-move)
 	    (< *movement* 9))
 
-	   (incf *movement*)))
+	   (cl-incf *movement*)))
 
     (princ (symbol-value (nth 1 (assoc *toilet* +toilet-list+)))
 	   (get-buffer "*uwu*"))
@@ -199,15 +201,16 @@
 
 (defun pet-gfx-lookup (total-points)
   (assoc 'gfx
-	 (symbol-value
-	  (points-to-evolution total-points))))
+	 (points-to-evolution total-points)))
 
 (defun points-to-evolution (total-points)
-  (dolist (points +pet-evolution-tree+)
-    (if (> (car points) total-points)
-	(return
-	 (nth 1
-	  (assoc (car points) +pet-evolution-tree+))))))
+  (symbol-value
+   (nth 1 (car
+	   (cl-loop for lookup in +pet-evolution-tree+
+		    when (< total-points (car lookup))
+		    collect lookup)))))
+
+
 
 (defun randomly-allocate-needs ()
   (funcall (nth (random 2) +pet-needs+)))
@@ -219,7 +222,7 @@
   
   (when
       (= *hearts* 0.0)
-    (decf *total-points*)))
+    (cl-decf *total-points*)))
 
 (defun uwu-toilet ()
   (unless
@@ -228,14 +231,14 @@
   
   (when
       (= *toilet* 4)
-    (decf *total-points*)))
+    (cl-decf *total-points*)))
 
 ;; ┌┬┐┬┌┬┐┌─┐┬─┐┌─┐
 ;;  │ ││││├┤ ├┬┘└─┐
 ;;  ┴ ┴┴ ┴└─┘┴└─└─┘
 
 (defun uwu-visualiser ()
-  (run-with-timer 0.5 0.5 #'uwu-animation-loop))
+  (run-with-idle-timer 1 1 #'uwu-animation-loop))
 
 (defun uwu-animation-loop ()
   (one-frame-of-animation *total-points*))
@@ -256,13 +259,13 @@
 (defun uwu-feed ()
   (interactive)
   (if (< *hearts* 4.0)  
-      (incf *total-points*))
+      (cl-incf *total-points*))
   (setf *hearts* 4.0))
 
 (defun uwu-clean-up ()    
   (interactive)
   (if (> *toilet* 0)
-      (incf *total-points*))
+      (cl-incf *total-points*))
     (setf *toilet* 0))
 
 
