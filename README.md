@@ -43,29 +43,20 @@ Steps to get *uwu.el* running:
 
 0. Download the two Version 2 files:
 
-```
-- uwu.el; and 
-- uwu-graphics-v2.el
-```
 
-1. Save `uwu.el` and `uwu-graphics-v2.el` to your `~/.emacs.d/` load
-  path.
+- `uwu.el` (the evaluatable code); and 
+- `uwu-graphics-v2.el` (the graphics and data package).
 
-2. Restart Emacs, so that the two files are automatically loaded.
+1. Save `uwu.el` and `uwu-graphics-v2.el` somewhere nice in the same folder (:
 
-3. If, for some reason, the two files fail to load, run:
+2. Run:
 
 ```
-M-x load-file ~/.emacs.d/path-to/uwu.el
+M-x load-file uwu.el
 ```
+(`uwu.el` now contains code to automatically load the graphics package)
 
-and
-
-```
-M-x load-file ~/.emacs.d/path-to/uwu-graphics-v2.el
-```
-
-4. Open a blank buffer, like *scratch* (for instance) and type:
+4. Open a blank buffer, like `*scratch*` (for instance) and type:
 
 ```
 M-x uwu-mode
