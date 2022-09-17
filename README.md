@@ -56,13 +56,13 @@ M-x load-file uwu.el
 ```
 (`uwu.el` now contains code to automatically load the graphics package)
 
-4. Open a blank buffer, like `*scratch*` (for instance) and type:
+3. Open a blank buffer, like `*scratch*` (for instance) and type:
 
 ```
 M-x uwu-mode
 ```
 
-5. Observe the following image:
+4. Observe the following image:
 
 ![](https://img.itch.zone/aW1nLzg2NDU3MzEucG5n/original/tnMX9I.png)
 
@@ -80,10 +80,10 @@ away by executing:
 M-x uwu-clean-up
 ```
 
-6. When you start the game, your 'high score' will, at first, equal
+5. When you start the game, your 'high score' will, at first, equal
 -10 (negative ten). Do not worry! This is normal! Your pet will not
 hatch from its egg until your 'high score' reaches 0 (zero).
 
-7. ???
+6. ???
 
-8. UwU
+7. UwU
