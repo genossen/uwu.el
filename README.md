@@ -41,28 +41,33 @@ General Public License for more details.
 
 Steps to get *uwu.el* running:
 
-0. Download the two Version 2 files:
+## 0. Getting the files.
 
+Download the two Version 2 files:
 
 - `uwu.el` (the evaluatable code); and 
 - `uwu-graphics-v2.el` (the graphics and data package).
 
-1. Save `uwu.el` and `uwu-graphics-v2.el` somewhere nice in the same folder (:
+## 1. Put files (somewhere) in same folder.
 
-2. Run:
+Save `uwu.el` and `uwu-graphics-v2.el` somewhere nice in the same folder (:
+
+## 2. Run the game (:
 
 ```
 M-x load-file uwu.el
 ```
 (`uwu.el` now contains code to automatically load the graphics package)
 
-3. Open a blank buffer, like `*scratch*` (for instance) and type:
+Then, open a blank buffer, like `*scratch*` (for instance) and type:
 
 ```
 M-x uwu-mode
 ```
 
-4. Observe the following image:
+## 3. Understanding the game.
+
+Observe the following image:
 
 ![](https://img.itch.zone/aW1nLzg2NDU3MzEucG5n/original/tnMX9I.png)
 
@@ -80,10 +85,10 @@ away by executing:
 M-x uwu-clean-up
 ```
 
-5. When you start the game, your 'high score' will, at first, equal
+When you start the game, your 'high score' will, at first, equal
 -10 (negative ten). Do not worry! This is normal! Your pet will not
 hatch from its egg until your 'high score' reaches 0 (zero).
 
-6. ???
+## 4. ???
 
-7. UwU
+## 5. UwU
