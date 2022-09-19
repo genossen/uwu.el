@@ -4,6 +4,11 @@
 ;;; └─┘└┴┘└─┘o└─┘┴─┘
 
 ;; Version 2.
+
+;; Major bug fix release.
+
+;; 2022-September-16.
+
 ;; By ~vidak.
 
 ;; This program is free software: you can redistribute it and/or
@@ -238,7 +243,7 @@
 ;;  ┴ ┴┴ ┴└─┘┴└─└─┘
 
 (defun uwu-visualiser ()
-  (run-with-idle-timer 1 1 #'uwu-animation-loop))
+  (run-with-timer 1 1 #'uwu-animation-loop))
 
 (defun uwu-animation-loop ()
   (one-frame-of-animation *total-points*))
