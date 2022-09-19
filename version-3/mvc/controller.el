@@ -65,3 +65,58 @@
 (defun toggle-asleep ()
   (cond  ((= *asleep* t) (setf *asleep* nil))
 	 ((= *asleep* nil) (setf *asleep* t))))
+
+;; need function for alerting user to turn off/on light upon sleep
+;; state changing
+
+;; ╦ ╦╔═╗╔═╗╦═╗ 
+;; ║ ║╚═╗║╣ ╠╦╝ 
+;; ╚═╝╚═╝╚═╝╩╚═ 
+;; ╦╔╗╔╔═╗╦ ╦╔╦╗
+;; ║║║║╠═╝║ ║ ║ 
+;; ╩╝╚╝╩  ╚═╝ ╩  
+
+(defun uwu-feed ()
+  (interactive)
+  (if (< *hearts* 4)  
+      (cl-incf *total-points*))
+  (cl-incf *hearts* 4))
+
+(defun uwu-clean-up ()    
+  (interactive)
+  (if (> *toilet* 0)
+      (cl-incf *total-points*))
+    (setf *toilet* 0))
+
+;; ╔╦╗╔═╗╦╔╗╔  
+;; ║║║╠═╣║║║║  
+;; ╩ ╩╩ ╩╩╝╚╝  
+;; ╦  ╔═╗╔═╗╔═╗
+;; ║  ║ ║║ ║╠═╝
+;; ╩═╝╚═╝╚═╝╩
+
+(defun uwu-visualiser ()
+  (run-with-timer 1 1 #'uwu-display-loop))
+
+(defun uwu-display-loop ()
+  (one-frame-of-animation *total-points*))
+
+(defun one-frame-of-animation (total-points)
+  (blank-and-draw-frame (pet-gfx-lookup total-points)))
+
+(defun blank-and-draw-frame (pet-gfx)
+  (set-buffer "*uwu*")
+  (erase-buffer)
+  (pet-movement pet-gfx))
+
+(defun pet-gfx-lookup (total-points)
+  (assoc 'gfx
+	 (symbol-value
+	  (points-to-evolution total-points))))
+
+(defun points-to-evolution (total-points)
+  (dolist (points +pet-evolution-tree+)
+    (if (> (car points) total-points)
+	(return
+	 (nth 1
+	  (assoc (car points) +pet-evolution-tree+))))))
