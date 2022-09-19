@@ -1,4 +1,12 @@
 
+;; ╔═╗╦═╗╔═╗╔═╗╦ ╦╦╔═╗╔═╗
+;; ║ ╦╠╦╝╠═╣╠═╝╠═╣║║  ╚═╗
+;; ╚═╝╩╚═╩ ╩╩  ╩ ╩╩╚═╝╚═╝
+;;     ╔═╗╔═╗╔═╗╦╔═      
+;;     ╠═╝╠═╣║  ╠╩╗      
+;;     ╩  ╩ ╩╚═╝╩ ╩ 
+
+
 ;; ┌─┐┌─┐┌─┐
 ;; ├┤ │ ┬│ ┬
 ;; └─┘└─┘└─┘
@@ -70,3 +78,74 @@
 ;; ┴ ┴─┴┘└─┘┴─┘┴ 
 
 ;; # 0
+
+(defconst +adult-chaotic-0+	  
+  (list
+   '(gfx
+     "(｀▽´)" ;; forward
+      "(｀▽´ )" ;; left-facing
+      "( ｀▽´)" ;; right-facing
+      "(o ｀▽´ )oΨ" ;; right-moving
+      "Ψo(｀▽´ o)");; left-moving
+   '(name "noroi")))
+
+;; # 1
+
+(defconst +adult-chaotic-1+
+  (list
+   '(gfx
+	"(⌐■_■¬)" ;; forward	
+	"(■_■¬ )" ;; left-facing	
+	"( ⌐■_■)" ;; right-facing	
+	"(>⌐■_■)>" ;; right-moving	
+	"<(■_■¬<)");; left-moving
+   '(name "kakkoii")))
+
+;; # 2
+
+(defconst +adult-chaotic-2+
+  (list
+   '(gfx
+      "(▼皿▼)" ;; forward
+      "(▼皿▼｡ )" ;; left-facing
+      "( ｡▼皿▼)" ;; right-facing
+      "(- ｡▼皿▼)-" ;; right-moving
+      "-(▼皿▼｡ -)");; left-moving
+   '(name "kabuto")))
+
+;; # 3
+
+(defconst +adult-chaotic-3+
+  (list
+   '(gfx
+      "(*Φ ω Φ*)" ;; forward
+      "(*Φ ω Φ* )" ;; left-facing
+      "( *Φ ω Φ*)" ;; right-facing
+      "(∿*Φ ω Φ*)∿" ;; right-moving
+      "∿(*Φ ω Φ*∿)");; left-moving
+   '(name "neko")))
+
+
+;; # 4
+
+(defconst +adult-chaotic-4+
+  (list
+   '(gfx
+      "(ʘ∀ʘ)" ;; forward
+      "(๑ʘ∀ʘ )" ;; left-facing
+      "( ๑ʘ∀ʘ)" ;; right-facing
+      "ε=┌(๑ʘ∀ʘ)┘" ;; right-moving
+      "┗(ʘ∀ʘ๑)┐┘=3");; left-moving
+   '(name "hashiru")))
+
+;; # 5
+
+(defconst +adult-chaotic-5+
+  (list
+   '(gfx
+     	"(Φ‿Φ)" ;; forward	
+	"(Φ‿Φ )" ;; left-facing	
+	"( Φ‿Φ)" ;; right-facing	
+	"Ψ( ;Φ‿Φ)_↑" ;; right-moving	
+	"↑_(Φ‿Φ;)Ψ");; left-moving
+   '(name "akuma")))
