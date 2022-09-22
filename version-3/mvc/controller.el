@@ -59,15 +59,27 @@
 ;; └─┐│  ├┤ ├┤ ├─┘
 ;; └─┘┴─┘└─┘└─┘┴  
 
-(defun uwu-toilet-timer ()
-  (run-with-timer (* 8 +one-hour+) (* 8 +one-hour+) #'toggle-asleep))
+(defun uwu-sleep-timer ()
+  (run-with-timer (* 8 +one-hour+) (* 8 +one-hour+) #'uwu-toggle-asleep))
 
-(defun toggle-asleep ()
+(defun uwu-toggle-asleep ()
   (cond  ((= *asleep* t) (setf *asleep* nil))
 	 ((= *asleep* nil) (setf *asleep* t))))
 
 ;; need function for alerting user to turn off/on light upon sleep
 ;; state changing
+
+;; ┌─┐┬─┐┌─┐┬ ┬┌┬┐┬ ┬
+;; │ ┬├┬┘│ ││││ │ ├─┤
+;; └─┘┴└─└─┘└┴┘ ┴ ┴ ┴
+
+;; egg hatches after 5 mins
+;; baby turns into child after 65 mins
+;; child becomes teen after 3 days
+;; teen becomes adult after 6 days
+
+(defun 
+(run-with-timer +five-minutes+ nil #'egg-hatch)
 
 ;; ╦ ╦╔═╗╔═╗╦═╗ 
 ;; ║ ║╚═╗║╣ ╠╦╝ 
@@ -115,8 +127,8 @@
 	  (points-to-evolution total-points))))
 
 (defun points-to-evolution (total-points)
-  (dolist (points +pet-evolution-tree+)
-    (if (> (car points) total-points)
-	(return
-	 (nth 1
-	  (assoc (car points) +pet-evolution-tree+))))))
+  (symbol-value
+   (nth 1 (car
+	   (cl-loop for lookup in +pet-evolution-tree+
+		    when (< total-points (car lookup))
+		    collect lookup)))))

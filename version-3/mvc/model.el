@@ -14,6 +14,28 @@
 (defconst +one-hour+ (* 60 60))
 (defconst +one-day+ (* 24 +one-hour+))
 
+(defconst +characters+ ; need to find a way to reduce hard-coding,
+		       ; such as here. the list of characters to
+		       ; traverse could potentially be placed within
+		       ; the graphics pack, and loaded into the
+		       ; evaluated code dynamically and automatically.
+  (list
+   +egg+
+   +babby-chaotic+
+   +child-chaotic+
+
+   (list
+    +teen-chaotic-0+
+    +teen-chaotic-1+)
+
+   (list
+    +adult-chaotic-0+
+    +adult-chaotic-1+
+    +adult-chaotic-2+
+    +adult-chaotic-3+
+    +adult-chaotic-4+
+    +adult-chaotic-5+)))
+
 ;; ┬  ┬┌─┐┬─┐┬┌─┐┌┐ ┬  ┌─┐┌─┐
 ;; └┐┌┘├─┤├┬┘│├─┤├┴┐│  ├┤ └─┐
 ;;  └┘ ┴ ┴┴└─┴┴ ┴└─┘┴─┘└─┘└─┘
