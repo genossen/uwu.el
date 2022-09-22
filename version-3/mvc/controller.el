@@ -151,5 +151,8 @@
 ;;   ┘└┘└─┘└─┘┴─┘└─┘└─┘ ┴   
 
 (defun uwu-handle-attention (uwu-attention-p)
-  )
+  ) ; if *attention* is set to T then work out why, and set a idle
+    ; timer. if the idle timer elapses, then cl-incf *neglect*
   
+;; - pet get sick (*illness*) if poops remain too long, will require medicine
+;; - cl-incf neglect if asleep and lights on
