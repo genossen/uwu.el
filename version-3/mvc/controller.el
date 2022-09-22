@@ -108,28 +108,48 @@
 ;; ║  ║ ║║ ║╠═╝
 ;; ╩═╝╚═╝╚═╝╩
 
-(defun uwu-visualiser ()
-  (run-with-timer 1 1 #'uwu-display-loop))
+(defun uwu-main-loop ()
+  (run-with-timer 1 1 #'uwu-loop))
 
-(defun uwu-display-loop ()
+(defun uwu-loop ()
+  (uwu-handle-attention *attention*) ; this line was a bit of luck. we
+				     ; check whether there are any
+				     ; outstanding user notifications
+				     ; before drawing a frame of
+				     ; animation. i think this makes
+				     ; the most sense.
   (one-frame-of-animation *character*))
 
 (defun one-frame-of-animation (character)
-  (blank-and-draw-frame (pet-gfx-lookup total-points)))
+  (blank-and-draw-frame (uwu-character-gfx-lookup character)))
 
-(defun blank-and-draw-frame (pet-gfx)
+(defun blank-and-draw-frame (character)
   (set-buffer "*uwu*")
   (erase-buffer)
-  (pet-movement pet-gfx))
+  (pet-movement character)) ; 2022-09-22@22.57: need to remember to
+			    ; rename "pet" to "character" here, as
+			    ; well as in view.el
 
-(defun pet-gfx-lookup (total-points)
-  (assoc 'gfx
-	 (symbol-value
-	  (points-to-evolution total-points))))
+(defun uwu-character-gfx-lookup (character)
+  (assoc 'gfx character))
 
-(defun points-to-evolution (total-points)
-  (symbol-value
-   (nth 1 (car
-	   (cl-loop for lookup in +pet-evolution-tree+
-		    when (< total-points (car lookup))
-		    collect lookup)))))
+;; (defun points-to-evolution (total-points)
+;;   (symbol-value
+;;    (nth 1 (car
+;; 	   (cl-loop for lookup in +pet-evolution-tree+
+;; 		    when (< total-points (car lookup))
+;; 		    collect lookup)))))
+
+;; ┌─┐┌┬┐┌┬┐┌─┐┌┐┌┌┬┐┬┌─┐┌┐┌
+;; ├─┤ │  │ ├┤ │││ │ ││ ││││
+;; ┴ ┴ ┴  ┴ └─┘┘└┘ ┴ ┴└─┘┘└┘
+;;         ┌─┐┌┐┌┌┬┐        
+;;         ├─┤│││ ││        
+;;         ┴ ┴┘└┘─┴┘        
+;;   ┌┐┌┌─┐┌─┐┬  ┌─┐┌─┐┌┬┐  
+;;   │││├┤ │ ┬│  ├┤ │   │   
+;;   ┘└┘└─┘└─┘┴─┘└─┘└─┘ ┴   
+
+(defun uwu-handle-attention (uwu-attention-p)
+  )
+  
