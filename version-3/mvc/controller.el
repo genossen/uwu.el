@@ -4,7 +4,7 @@
 ;; ╚═╝╚═╝╝╚╝ ╩ ╩╚═╚═╝╩═╝╩═╝╚═╝╩╚═
 
 (defun uwu-init ()
-  (setf *character +egg+)
+  (setf *character* +egg+)
   (setf *hearts* 4)
   (setf *toilet* 0)
   (setf *total-points* 0)
