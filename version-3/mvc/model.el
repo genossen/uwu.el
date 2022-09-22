@@ -40,6 +40,7 @@
 ;; └┐┌┘├─┤├┬┘│├─┤├┴┐│  ├┤ └─┐
 ;;  └┘ ┴ ┴┴└─┴┴ ┴└─┘┴─┘└─┘└─┘
 
+(defvar *character* +egg+)
 (defvar *hearts* 4) ; this meter decreases with neglect
 (defvar *hungry* 4) ; this meter decreases with hunger
 (defvar *toilet* 0) ; this meter increases with more poops

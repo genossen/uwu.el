@@ -4,6 +4,7 @@
 ;; ╚═╝╚═╝╝╚╝ ╩ ╩╚═╚═╝╩═╝╩═╝╚═╝╩╚═
 
 (defun uwu-init ()
+  (setf *character +egg+)
   (setf *hearts* 4)
   (setf *toilet* 0)
   (setf *total-points* 0)
@@ -78,8 +79,8 @@
 ;; child becomes teen after 3 days
 ;; teen becomes adult after 6 days
 
-(defun 
-(run-with-timer +five-minutes+ nil #'egg-hatch)
+(defun uwu-egg-hatch-timer ()
+  (run-with-timer +five-minutes+ nil #'uwu-grow-to-baby))
 
 ;; ╦ ╦╔═╗╔═╗╦═╗ 
 ;; ║ ║╚═╗║╣ ╠╦╝ 
@@ -111,9 +112,9 @@
   (run-with-timer 1 1 #'uwu-display-loop))
 
 (defun uwu-display-loop ()
-  (one-frame-of-animation *total-points*))
+  (one-frame-of-animation *character*))
 
-(defun one-frame-of-animation (total-points)
+(defun one-frame-of-animation (character)
   (blank-and-draw-frame (pet-gfx-lookup total-points)))
 
 (defun blank-and-draw-frame (pet-gfx)
