@@ -7,7 +7,6 @@
   (setf *character* +egg+)
   (setf *hearts* 4)
   (setf *toilet* 0)
-  (setf *total-points* 0)
   (setf *hungry* 4)
 
 ;;  (get-buffer-create "*uwu*")
@@ -22,7 +21,8 @@
 (defun uwu-init-timers ()
   (uwu-hunger-timer)
   (uwu-toilet-timer)
-  (uwu-sleep-timer))
+  (uwu-sleep-timer)
+  (uwu-egg-hatch-timer))
 
 ;; ┬ ┬┬ ┬┌┐┌┌─┐┌─┐┬─┐
 ;; ├─┤│ │││││ ┬├┤ ├┬┘
@@ -81,17 +81,36 @@
 ;; child becomes teen after 3 days
 ;; teen becomes adult after 6 days
 
+;; all these timers are one-shots. when one finishes, they run the
+;; next one.
+
 (defun uwu-egg-hatch-timer ()
   (run-with-timer +five-minutes+ nil #'uwu-grow-to-baby))
+
+(defun uwu-grow-to-baby ()
+  (setf *character* +babby-chaotic+)
+  (uwu-grow-to-child-timer))
 
 (defun uwu-grow-to-child-timer ()
   (run-with-timer (+ +one-hour+ +five-minutes+) nil #'uwu-grow-to-child))
 
+(defun uwu-grow-to-child ()
+  (setf *character* +child-chaotic+)
+  (uwu-grow-to-teen-timer))
+
 (defun uwu-grow-to-teen-timer ()
   (run-with-timer (* 3 +one-day+) nil #'uwu-grow-to-teen))
 
+(defun uwu-grow-to-teen ()
+  ;; need logic for deciding teen-0 or teen-1
+  (uwu-grow-to-adult-timer))
+
 (defun uwu-grow-to-adult-timer ()
   (run-with-timer (* 6 +one-day+) nil #'uwu-grow-to-adult))
+
+(defun uwu-grow-to-adult ()
+;; need logic for deciding which adult character
+  )
 
 ;; ╦ ╦╔═╗╔═╗╦═╗ 
 ;; ║ ║╚═╗║╣ ╠╦╝ 
