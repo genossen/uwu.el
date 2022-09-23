@@ -102,15 +102,20 @@
   (run-with-timer (* 3 +one-day+) nil #'uwu-grow-to-teen))
 
 (defun uwu-grow-to-teen ()
-  ;; need logic for deciding teen-0 or teen-1
+  (cond ((eq *neglect* 0) (setf *character* +teen-chaotic-0+))
+	(t                (setf *character* +teen-chaotic-1+)))
   (uwu-grow-to-adult-timer))
 
 (defun uwu-grow-to-adult-timer ()
   (run-with-timer (* 6 +one-day+) nil #'uwu-grow-to-adult))
 
 (defun uwu-grow-to-adult ()
-;; need logic for deciding which adult character
-  )
+  (cond ((eq *neglect* 0) (setf *character*
+				(nth (random 6)
+				     +adult-characters+)))
+	(t                (setf *character*
+				(nth (- 5 (random 3))
+				     +adult-characters+)))))
 
 ;; ╦ ╦╔═╗╔═╗╦═╗ 
 ;; ║ ║╚═╗║╣ ╠╦╝ 
