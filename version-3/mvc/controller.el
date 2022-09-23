@@ -64,8 +64,10 @@
   (run-with-timer (* 8 +one-hour+) (* 8 +one-hour+) #'uwu-toggle-asleep))
 
 (defun uwu-toggle-asleep ()
-  (cond  ((= *asleep* t) (setf *asleep* nil))
-	 ((= *asleep* nil) (setf *asleep* t))))
+  (cond  ((eq *asleep* t) (setf *asleep* nil))
+	 ((eq *asleep* nil) (setf *asleep* t)))) ; this may not work
+						 ; (apparently it
+						 ; does?)
 
 ;; need function for alerting user to turn off/on light upon sleep
 ;; state changing
@@ -82,6 +84,15 @@
 (defun uwu-egg-hatch-timer ()
   (run-with-timer +five-minutes+ nil #'uwu-grow-to-baby))
 
+(defun uwu-grow-to-child-timer ()
+  (run-with-timer (+ +one-hour+ +five-minutes+) nil #'uwu-grow-to-child))
+
+(defun uwu-grow-to-teen-timer ()
+  (run-with-timer (* 3 +one-day+) nil #'uwu-grow-to-teen))
+
+(defun uwu-grow-to-adult-timer ()
+  (run-with-timer (* 6 +one-day+) nil #'uwu-grow-to-adult))
+
 ;; ╦ ╦╔═╗╔═╗╦═╗ 
 ;; ║ ║╚═╗║╣ ╠╦╝ 
 ;; ╚═╝╚═╝╚═╝╩╚═ 
@@ -91,15 +102,13 @@
 
 (defun uwu-feed ()
   (interactive)
-  (if (< *hearts* 4)  
-      (cl-incf *total-points*))
-  (cl-incf *hearts* 4))
+  (if (< *hearts* 4)
+  (setf *hearts* 4)))
 
 (defun uwu-clean-up ()    
   (interactive)
   (if (> *toilet* 0)
-      (cl-incf *total-points*))
-    (setf *toilet* 0))
+    (setf *toilet* 0)))
 
 ;; ╔╦╗╔═╗╦╔╗╔  
 ;; ║║║╠═╣║║║║  
