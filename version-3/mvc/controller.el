@@ -127,7 +127,7 @@
 (defun uwu-feed ()
   (interactive)
   (if (< *hearts* 4)
-  (setf *hearts* 4)))
+  (cl-incf *hearts*))) ; feeding now only fills one heart at a time.
 
 (defun uwu-clean-up ()    
   (interactive)
@@ -166,13 +166,6 @@
 (defun uwu-character-gfx-lookup (character)
   (assoc 'gfx character))
 
-;; (defun points-to-evolution (total-points)
-;;   (symbol-value
-;;    (nth 1 (car
-;; 	   (cl-loop for lookup in +pet-evolution-tree+
-;; 		    when (< total-points (car lookup))
-;; 		    collect lookup)))))
-
 ;; ┌─┐┌┬┐┌┬┐┌─┐┌┐┌┌┬┐┬┌─┐┌┐┌
 ;; ├─┤ │  │ ├┤ │││ │ ││ ││││
 ;; ┴ ┴ ┴  ┴ └─┘┘└┘ ┴ ┴└─┘┘└┘
@@ -187,5 +180,7 @@
   ) ; if *attention* is set to T then work out why, and set a idle
     ; timer. if the idle timer elapses, then cl-incf *neglect*
   
-;; - pet get sick (*illness*) if poops remain too long, will require medicine
+;; - pet get sick (*illness*) if poops remain too long, will require
+;;   medicine
 ;; - cl-incf neglect if asleep and lights on
+;; - 
