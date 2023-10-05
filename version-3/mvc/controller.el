@@ -22,7 +22,8 @@
   (uwu-hunger-timer)
   (uwu-toilet-timer)
   (uwu-sleep-timer)
-  (uwu-egg-hatch-timer))
+  (uwu-egg-hatch-timer)
+  (uwu-attention-timer))
 
 ;; ┬ ┬┬ ┬┌┐┌┌─┐┌─┐┬─┐
 ;; ├─┤│ │││││ ┬├┤ ├┬┘
@@ -117,6 +118,11 @@
 				(nth (- 5 (random 3))
 				     +adult-characters+)))))
 
+;; ATTENTION **
+
+(defun uwu-attention-timer ()
+  (run-with-timer +fifteen-minutes+ +fifteen-minutes+ #'uwu-handle-attention))
+
 ;; ╦ ╦╔═╗╔═╗╦═╗ 
 ;; ║ ║╚═╗║╣ ╠╦╝ 
 ;; ╚═╝╚═╝╚═╝╩╚═ 
@@ -145,12 +151,14 @@
   (run-with-timer 1 1 #'uwu-loop))
 
 (defun uwu-loop ()
-  (uwu-handle-attention *attention*) ; this line was a bit of luck. we
-				     ; check whether there are any
-				     ; outstanding user notifications
-				     ; before drawing a frame of
-				     ; animation. i think this makes
-				     ; the most sense.
+                                     ; ~~this line was a bit of
+				     ; luck. we check whether there
+				     ; are any outstanding user
+				     ; notifications before drawing a
+				     ; frame of animation. i think
+				     ; this makes the most sense.~~
+				     ; WELL THAT WAS WRONG 2023-10-05
+
   (one-frame-of-animation *character*))
 
 (defun one-frame-of-animation (character)
@@ -178,9 +186,13 @@
 
 (defun uwu-handle-attention (uwu-attention-p)
 
-  (cond ((and (equal uwu-attention-p t)) (equal *attention-flag* t)
+  (cond ((and (equal uwu-attention-p t) (equal *attention-flag* t))
 
 	 (uwu-attention-collision))
+
+	((and (equal uwu-attention-p t) (equal *attention-flag* nil))
+
+	 (uwu-attention-flag-setup))
 
 	((and (equal uwu-attention-p nil)) (equal *attention-flag* t))
 
@@ -189,8 +201,17 @@
 	      (return))))
 
 
-  (defun uwu-attention-collision ()
-    *
+(defun uwu-attention-collision ()
+  (cl-decf *heart*)
+  (setf *attention* nil)
+  (setf *attention-flag* nil))
+
+(defun uwu-attention-flag-setup ()
+  (setf *attention-flag* t))
+
+(defun uwu-attention-flag-down ()
+  (setf *attention-flag* nil))
+    
 
 
   (when
