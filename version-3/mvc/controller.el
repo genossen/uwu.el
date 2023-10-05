@@ -178,15 +178,19 @@
 
 (defun uwu-handle-attention (uwu-attention-p)
 
-  (cond ((and
-	  (equal uwu-attention-p t))
-	 (equal *attention-flag* t))
+  (cond ((and (equal uwu-attention-p t)) (equal *attention-flag* t)
+
+	 (uwu-attention-collision))
+
+	((and (equal uwu-attention-p nil)) (equal *attention-flag* t))
+
+	((and (equal uwu-attention-p nil)
+	      (equal *attention-flag* nil))
+	      (return))))
 
 
-	  ()) ())
-
-
-
+  (defun uwu-attention-collision ()
+    *
 
 
   (when
