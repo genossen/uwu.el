@@ -110,7 +110,7 @@
   (run-with-timer (* 6 +one-day+) nil #'uwu-grow-to-adult))
 
 (defun uwu-grow-to-adult ()
-  (cond ((eq *neglect* 0) (setf *character*
+  (cond ((equal *neglect* 0) (setf *character*
 				(nth (random 6)
 				     +adult-characters+)))
 	(t                (setf *character*
@@ -177,8 +177,12 @@
 ;;   ┘└┘└─┘└─┘┴─┘└─┘└─┘ ┴   
 
 (defun uwu-handle-attention (uwu-attention-p)
-  ) ; if *attention* is set to T then work out why, and set a idle
-    ; timer. if the idle timer elapses, then cl-incf *neglect*
+  (if (equal uwu-attention-p t)
+      (cond ((= *hungry* 0.0) ())
+			       ; if *attention* is set to T then work
+			       ; out why, and set a idle timer. if the
+			       ; idle timer elapses, then cl-incf
+			       ; *neglect*
   
 ;; - pet get sick (*illness*) if poops remain too long, will require
 ;;   medicine
