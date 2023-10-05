@@ -52,8 +52,8 @@
     (terpri (get-buffer "*uwu*"))
 
     (princ
-     (concat "high score: "
-	     (number-to-string *total-points*))
+     (concat "messages: "
+	     *uwu-player-messages*)
      (get-buffer "*uwu*"))))
 
 ;; ┌─┐┌─┐┌┬┐  ┌─┐┌─┐┬  ┌─┐┌─┐┌─┐

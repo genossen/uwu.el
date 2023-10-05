@@ -194,11 +194,12 @@
 
 	 (uwu-attention-flag-setup))
 
-	((and (equal uwu-attention-p nil)) (equal *attention-flag* t))
+	((and (equal uwu-attention-p nil)) (equal *attention-flag* t)
+	 (uwu-attention-flag-down))
 
 	((and (equal uwu-attention-p nil)
 	      (equal *attention-flag* nil))
-	      (return))))
+	      (setf *uwu-player-messages* "Good job C;"))))
 
 
 (defun uwu-attention-collision ()
