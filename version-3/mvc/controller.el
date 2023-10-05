@@ -177,8 +177,19 @@
 ;;   ┘└┘└─┘└─┘┴─┘└─┘└─┘ ┴   
 
 (defun uwu-handle-attention (uwu-attention-p)
-  (if (equal uwu-attention-p t)
-      (cond ((= *hungry* 0.0) ())
+  (when (equal uwu-attention-p t)
+    (unless
+	(equal *attention-lock* t)
+      (if (= *hungry* 0.0)
+	  (uwu-handle-hunger))
+      (if (= *toilet* 4)
+	  (handle-toilet))
+      (if (= *hearts* 0)
+	  (handle-hearts))
+      (if (equal *asleep* t)
+	  (handle-lights))
+      (if (equal *illness*)
+	  (handle-illness)))))
 			       ; if *attention* is set to T then work
 			       ; out why, and set a idle timer. if the
 			       ; idle timer elapses, then cl-incf
@@ -188,3 +199,7 @@
 ;;   medicine
 ;; - cl-incf neglect if asleep and lights on
 ;; - 
+
+(defun uwu-handle-hunger ()
+  (unless
+      (equal 
