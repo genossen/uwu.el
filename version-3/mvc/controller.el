@@ -177,25 +177,53 @@
 ;;   ┘└┘└─┘└─┘┴─┘└─┘└─┘ ┴   
 
 (defun uwu-handle-attention (uwu-attention-p)
-  (when (equal uwu-attention-p t)
+
+  (cond ((and
+	  (equal uwu-attention-p t))
+	 (equal *attention-flag* t))
+
+
+	  ()) ())
+
+
+
+
+
+  (when
+      (equal uwu-attention-p t)
+
     (unless
-	(equal *attention-lock* t)
+	(equal *attention-flag* t)
+
       (if (= *hungry* 0.0)
 	  (uwu-handle-hunger))
+
       (if (= *toilet* 4)
 	  (handle-toilet))
+
       (if (= *hearts* 0)
 	  (handle-hearts))
+
       (if (equal *asleep* t)
 	  (handle-lights))
+
       (if (equal *illness*)
 	  (handle-illness)))
+
     (when
-	(equal *attention-lock* t)
-      (cl-incf *neglect*)
+	(equal *attention-flag* t)
+
+      (cl-incf *neglect*)))
+
+  (when (equal uwu-attention-p nil)
+
+    (unless
+	(equal *attention-flag* nil)
+      
+	
 
 
-      )))
+      ))
 			       ; if *attention* is set to T then work
 			       ; out why, and set a idle timer. if the
 			       ; idle timer elapses, then cl-incf
@@ -208,5 +236,5 @@
 
 (defun uwu-handle-hunger ()
   (unless
-      (equal *attention-lock* t)
+      (equal *attention-flag* t)
     )

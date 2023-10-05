@@ -40,7 +40,7 @@
 (defvar *asleep* nil)
 (defvar *lights* nil)
 (defvar *attention* nil)
-(defvar *attention-lock* nil)
+(defvar *attention-flag* nil)
 (defvar *neglect* 0)
 (defvar *illness* nil)
 (defvar *free-neglects* 0)
