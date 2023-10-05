@@ -189,7 +189,13 @@
       (if (equal *asleep* t)
 	  (handle-lights))
       (if (equal *illness*)
-	  (handle-illness)))))
+	  (handle-illness)))
+    (when
+	(equal *attention-lock* t)
+      (cl-incf *neglect*)
+
+
+      )))
 			       ; if *attention* is set to T then work
 			       ; out why, and set a idle timer. if the
 			       ; idle timer elapses, then cl-incf
@@ -202,4 +208,5 @@
 
 (defun uwu-handle-hunger ()
   (unless
-      (equal 
+      (equal *attention-lock* t)
+    )

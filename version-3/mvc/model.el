@@ -43,4 +43,4 @@
 (defvar *attention-lock* nil)
 (defvar *neglect* 0)
 (defvar *illness* nil)
-
+(defvar *free-neglects* 0)
