@@ -79,6 +79,13 @@
 
 
 
+;; ┬┬  ┬  ┌┐┌┌─┐┌─┐┌─┐
+;; ││  │  │││├┤ └─┐└─┐
+;; ┴┴─┘┴─┘┘└┘└─┘└─┘└─┘
+
+;; - pet get sick (*illness*) if poops remain too long, will require
+;;   medicine
+
 
 ;; ┬ ┬┌─┐┌─┐┬─┐┌┬┐┌─┐
 ;; ├─┤├┤ ├─┤├┬┘ │ └─┐
@@ -208,10 +215,16 @@
 
 
 (defun uwu-attention-collision ()
-  (unless (= *he
-  (cl-decf *hearts*)
-  (setf *attention* nil)
-  (setf *attention-flag* nil))
+  (unless
+      (= *hearts* 0)
+    (cl-decf *hearts*)
+    (setf *attention* nil)
+    (setf *attention-flag* nil))
+
+  (when
+      (= *hearts* 0)
+    (cl-incf *neglect*)))
+    
 
 (defun uwu-attention-flag-setup ()
   (setf *attention-flag* t))
@@ -220,8 +233,7 @@
   (setf *attention-flag* nil))
 
   
-;; - pet get sick (*illness*) if poops remain too long, will require
-;;   medicine
+
 ;; - cl-incf neglect if asleep and lights on
 ;; - 
 
