@@ -70,8 +70,21 @@
 						 ; (apparently it
 						 ; does?)
 
+;; ┬  ┬┌─┐┬ ┬┌┬┐
+;; │  ││ ┬├─┤ │ 
+;; ┴─┘┴└─┘┴ ┴ ┴ 
+
 ;; need function for alerting user to turn off/on light upon sleep
 ;; state changing
+
+
+
+
+;; ┬ ┬┌─┐┌─┐┬─┐┌┬┐┌─┐
+;; ├─┤├┤ ├─┤├┬┘ │ └─┐
+;; ┴ ┴└─┘┴ ┴┴└─ ┴ └─┘
+
+;; need function for assessing the level of hearts
 
 ;; ┌─┐┬─┐┌─┐┬ ┬┌┬┐┬ ┬
 ;; │ ┬├┬┘│ ││││ │ ├─┤
@@ -118,7 +131,9 @@
 				(nth (- 5 (random 3))
 				     +adult-characters+)))))
 
-;; ATTENTION **
+;; ┌─┐┌┬┐┌┬┐┌─┐┌┐┌┌┬┐┬┌─┐┌┐┌
+;; ├─┤ │  │ ├┤ │││ │ ││ ││││
+;; ┴ ┴ ┴  ┴ └─┘┘└┘ ┴ ┴└─┘┘└┘
 
 (defun uwu-attention-timer ()
   (run-with-timer +fifteen-minutes+ +fifteen-minutes+ #'uwu-handle-attention))
@@ -203,7 +218,8 @@
 
 
 (defun uwu-attention-collision ()
-  (cl-decf *heart*)
+  (unless (= *he
+  (cl-decf *hearts*)
   (setf *attention* nil)
   (setf *attention-flag* nil))
 
@@ -212,48 +228,7 @@
 
 (defun uwu-attention-flag-down ()
   (setf *attention-flag* nil))
-    
 
-
-  (when
-      (equal uwu-attention-p t)
-
-    (unless
-	(equal *attention-flag* t)
-
-      (if (= *hungry* 0.0)
-	  (uwu-handle-hunger))
-
-      (if (= *toilet* 4)
-	  (handle-toilet))
-
-      (if (= *hearts* 0)
-	  (handle-hearts))
-
-      (if (equal *asleep* t)
-	  (handle-lights))
-
-      (if (equal *illness*)
-	  (handle-illness)))
-
-    (when
-	(equal *attention-flag* t)
-
-      (cl-incf *neglect*)))
-
-  (when (equal uwu-attention-p nil)
-
-    (unless
-	(equal *attention-flag* nil)
-      
-	
-
-
-      ))
-			       ; if *attention* is set to T then work
-			       ; out why, and set a idle timer. if the
-			       ; idle timer elapses, then cl-incf
-			       ; *neglect*
   
 ;; - pet get sick (*illness*) if poops remain too long, will require
 ;;   medicine
