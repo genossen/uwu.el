@@ -7,7 +7,7 @@
 
 Version 2.
 
-_Version 3 is currently under development, as of 2022-09-12._
+_Version 3 is currently under development, as of 2023-10-12._
 
 By: ~vidak
 

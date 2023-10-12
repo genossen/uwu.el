@@ -34,11 +34,11 @@
 
 (defun uwu-hunger ()
   (unless
-      (= *hungry* 0.0)
+      (= *hungry* 0)
     (setf *hungry* (- *hungry* 1)))
   
   (when
-      (= *hungry* 0.0)
+      (= *hungry* 0)
     (setf *attention* t)))
 
 ;; ┌┬┐┌─┐┬┬  ┌─┐┌┬┐
@@ -62,13 +62,20 @@
 ;; └─┘┴─┘└─┘└─┘┴  
 
 (defun uwu-sleep-timer ()
-  (run-with-timer (* 8 +one-hour+) (* 8 +one-hour+) #'uwu-toggle-asleep))
+  (run-with-timer (* 8 +one-hour+) (* 8 +one-hour+) #'uwu-sleep-handler))
 
 (defun uwu-toggle-asleep ()
   (cond  ((eq *asleep* t) (setf *asleep* nil))
 	 ((eq *asleep* nil) (setf *asleep* t)))) ; this may not work
-						 ; (apparently it
-						 ; does?)
+					         ; (apparently it
+					         ; does?)
+
+(defun uwu-sleep-handler ()
+  (uwu-toggle-asleep)
+  (when
+      (and
+       (eq *asleep* 
+  
 
 ;; ┬  ┬┌─┐┬ ┬┌┬┐
 ;; │  ││ ┬├─┤ │ 
