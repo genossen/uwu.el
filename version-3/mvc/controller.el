@@ -166,14 +166,6 @@
   (run-with-timer 1 1 #'uwu-loop))
 
 (defun uwu-loop ()
-                                     ; ~~this line was a bit of
-				     ; luck. we check whether there
-				     ; are any outstanding user
-				     ; notifications before drawing a
-				     ; frame of animation. i think
-				     ; this makes the most sense.~~
-				     ; WELL THAT WAS WRONG 2023-10-05
-
   (one-frame-of-animation *character*))
 
 (defun one-frame-of-animation (character)
@@ -182,22 +174,20 @@
 (defun blank-and-draw-frame (character)
   (set-buffer "*uwu*")
   (erase-buffer)
-  (pet-movement character)) ; 2022-09-22@22.57: need to remember to
-			    ; rename "pet" to "character" here, as
-			    ; well as in view.el
+  (pet-movement character))
 
 (defun uwu-character-gfx-lookup (character)
   (assoc 'gfx character))
 
-;; ┌─┐┌┬┐┌┬┐┌─┐┌┐┌┌┬┐┬┌─┐┌┐┌
-;; ├─┤ │  │ ├┤ │││ │ ││ ││││
-;; ┴ ┴ ┴  ┴ └─┘┘└┘ ┴ ┴└─┘┘└┘
-;;         ┌─┐┌┐┌┌┬┐        
-;;         ├─┤│││ ││        
-;;         ┴ ┴┘└┘─┴┘        
-;;   ┌┐┌┌─┐┌─┐┬  ┌─┐┌─┐┌┬┐  
-;;   │││├┤ │ ┬│  ├┤ │   │   
-;;   ┘└┘└─┘└─┘┴─┘└─┘└─┘ ┴   
+;; ╔═╗╔╦╗╔╦╗╔═╗╔╗╔╔╦╗╦╔═╗╔╗╔
+;; ╠═╣ ║  ║ ║╣ ║║║ ║ ║║ ║║║║
+;; ╩ ╩ ╩  ╩ ╚═╝╝╚╝ ╩ ╩╚═╝╝╚╝
+;;         ╔═╗╔╗╔╔╦╗        
+;;         ╠═╣║║║ ║║        
+;;         ╩ ╩╝╚╝═╩╝        
+;;   ╔╗╔╔═╗╔═╗╦  ╔═╗╔═╗╔╦╗  
+;;   ║║║║╣ ║ ╦║  ║╣ ║   ║   
+;;   ╝╚╝╚═╝╚═╝╩═╝╚═╝╚═╝ ╩   
 
 (defun uwu-handle-attention (uwu-attention-p)
 
