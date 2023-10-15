@@ -65,25 +65,46 @@
   (run-with-timer (* 8 +one-hour+) (* 8 +one-hour+) #'uwu-sleep-handler))
 
 (defun uwu-toggle-asleep ()
-  (cond  ((eq *asleep* t) (setf *asleep* nil))
-	 ((eq *asleep* nil) (setf *asleep* t)))) ; this may not work
+  (cond  ((equal *asleep* t) (setf *asleep* nil))
+	 ((equal *asleep* nil) (setf *asleep* t)))) ; this may not work
 					         ; (apparently it
 					         ; does?)
+
+;; the way that the COND macrro works is that it exits whenever it
+;; encounters a condition that returns T. this means that the ordering
+;; of the clauses is very important.
+;;
+;; the uwu-sleep-handler function runs every 8 hours. it toggles
+;; whether the pet character is asleep, and checks to see if the user
+;; has set the light in the correct mode for the sleep state of the
+;; pet character.
+;;
+;; the initial state of the pet is awake. this means that 
 
 (defun uwu-sleep-handler ()
   (uwu-toggle-asleep)
 
-  (unless
-      (and
-       (eq *asleep* nil)
-       (eq *lights* nil))
+  (cond
+
+   ;; when awake, and lights on. (correct care)
+   
+   ((and (equal *asleep* nil) (equal *lights* t)) 
+    (setf *uwu-player-messages* ""))
+
+   ;; when asleep, and lights on. (neglectful care)
+   
+   ((and (equal *asleep* t) (equal *lights* t))
     (setf *attention* t))
-  
-  (when
-      (and
-       (eq *asleep* nil)
-       (eq *lights* t))
-    ))
+
+   ;; when asleep, and lights off. (correct care)
+
+   ((and (equal *asleep* t) (equal *lights* nil))
+    (setf *attention* t))
+
+      ;; when awake, and lights off. (neglectful care)
+   
+   ((and (equal *asleep* nil) (equal *lights* nil))
+    (setf *))))
   
 
 ;; ┬  ┬┌─┐┬ ┬┌┬┐

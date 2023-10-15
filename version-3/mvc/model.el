@@ -37,8 +37,8 @@
 (defvar *hearts* 4) ; this meter decreases with neglect
 (defvar *hungry* 4) ; this meter decreases with hunger
 (defvar *toilet* 0) ; this meter increases with more poops
-(defvar *asleep* nil)
-(defvar *lights* nil)
+(defvar *asleep* nil) ; initial value nil, means awake.
+(defvar *lights* t) ; initial value t, means lights are on.
 (defvar *attention* nil)
 (defvar *attention-flag* nil)
 (defvar *neglect* 0)
