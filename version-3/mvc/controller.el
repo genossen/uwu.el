@@ -72,9 +72,18 @@
 
 (defun uwu-sleep-handler ()
   (uwu-toggle-asleep)
+
+  (unless
+      (and
+       (eq *asleep* nil)
+       (eq *lights* nil))
+    (setf *attention* t))
+  
   (when
       (and
-       (eq *asleep* 
+       (eq *asleep* nil)
+       (eq *lights* t))
+    ))
   
 
 ;; ┬  ┬┌─┐┬ ┬┌┬┐
