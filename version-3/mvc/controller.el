@@ -79,7 +79,9 @@
 ;; has set the light in the correct mode for the sleep state of the
 ;; pet character.
 ;;
-;; the initial state of the pet is awake. this means that 
+;; the initial state of the pet is awake. this means that when the
+;; sleep handler runs for the first time, it is very likely that the
+;; user will need to turn the lights off.
 
 (defun uwu-sleep-handler ()
   (uwu-toggle-asleep)
@@ -97,14 +99,15 @@
     (setf *attention* t))
 
    ;; when asleep, and lights off. (correct care)
+   
 
    ((and (equal *asleep* t) (equal *lights* nil))
     (setf *attention* t))
 
-      ;; when awake, and lights off. (neglectful care)
-   
+   ;; when awake, and lights off. (neglectful care)
+      
    ((and (equal *asleep* nil) (equal *lights* nil))
-    (setf *))))
+    (setf *uwu-player-messages* ""))))
   
 
 ;; ┬  ┬┌─┐┬ ┬┌┬┐
