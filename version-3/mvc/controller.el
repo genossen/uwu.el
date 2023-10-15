@@ -236,22 +236,46 @@
 ;;   ║║║║╣ ║ ╦║  ║╣ ║   ║   
 ;;   ╝╚╝╚═╝╚═╝╩═╝╚═╝╚═╝ ╩   
 
+
+
 (defun uwu-handle-attention (uwu-attention-p)
 
-  (cond ((and (equal uwu-attention-p t) (equal *attention-flag* t))
+  (cond
 
-	 (uwu-attention-collision))
+   ;; the attention flag has already been raised, and again the
+   ;; attention variable has been "triggered", i.e.,  set to T.
+   ;;
+   ;; the result will be that the pet character loses a heart.
 
-	((and (equal uwu-attention-p t) (equal *attention-flag* nil))
+   ((and (equal uwu-attention-p t) (equal *attention-flag* t))
+    (uwu-attention-collision))
 
-	 (uwu-attention-flag-setup))
+   ;; the attention variable has been triggered, but the flag has not
+   ;; previously been raised.
+   ;;
+   ;; the result, therefore, is that we trigger the flag, and wait for
+   ;; this function to be called again after 15 minutes.
 
-	((and (equal uwu-attention-p nil)) (equal *attention-flag* t)
-	 (uwu-attention-flag-down))
+   ((and (equal uwu-attention-p t) (equal *attention-flag* nil))
+    (uwu-attention-flag-setup))
 
-	((and (equal uwu-attention-p nil)
-	      (equal *attention-flag* nil))
-	      (setf *uwu-player-messages* "Good job C;"))))
+   ;; the flag is up, but the attention variable is no longer
+   ;; triggered. the assumption here is that the user has solved the
+   ;; issue(s) that would trigger the attention variable.
+   ;;
+   ;; the result is that we set the flag down.
+
+   ((and (equal uwu-attention-p nil) (equal *attention-flag* t))
+    (uwu-attention-flag-down))
+
+   ;; the attention variable has not been triggered, and the flag is
+   ;; down.
+   ;;
+   ;; the result is that we do nothing.
+
+   ((and (equal uwu-attention-p nil) (equal *attention-flag* nil))
+    (setf *uwu-player-messages* "Good job C;"))))
+
 
 
 (defun uwu-attention-collision ()
