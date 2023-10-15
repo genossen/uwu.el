@@ -84,8 +84,9 @@
 ;; user will need to turn the lights off.
 
 (defun uwu-sleep-handler ()
+  
   (uwu-toggle-asleep)
-
+  
   (cond
 
    ;; when awake, and lights on. (correct care)
@@ -99,15 +100,14 @@
     (setf *attention* t))
 
    ;; when asleep, and lights off. (correct care)
-   
 
    ((and (equal *asleep* t) (equal *lights* nil))
-    (setf *attention* t))
+    (setf *uwu-player-messages* ""))
 
    ;; when awake, and lights off. (neglectful care)
       
    ((and (equal *asleep* nil) (equal *lights* nil))
-    (setf *uwu-player-messages* ""))))
+    (setf *attention* t))))
   
 
 ;; ┬  ┬┌─┐┬ ┬┌┬┐
