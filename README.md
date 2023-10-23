@@ -5,9 +5,9 @@
 └─┘└┴┘└─┘o└─┘┴─┘
 ```
 
-Version 2.
+Version 3.
 
-_Version 3 is currently under development, as of 2023-10-12._
+_Version 3 is currently under development, as of 2023-10-24._
 
 By: ~vidak
 
@@ -39,56 +39,64 @@ General Public License for more details.
 
 # README
 
-Steps to get *uwu.el* running:
+## Version 3 Development Log
 
-## 0. Getting the files.
+## Version 3 Will Feature Several Discrete Variations
 
-Download the two Version 2 files:
+> 2022-September-19.
+> ~ 1700 HRS
 
-- `uwu.el` (the evaluatable code); and 
-- `uwu-graphics-v2.el` (the graphics and data package).
+the [tamagotchi fandom
+wiki](https://tamagotchi.fandom.com/wiki/Tamagotchi_(1996_Pet)) has
+improved markedly over the last few months, and now includes more
+information about how the original tamagotchi game functions.
 
-## 1. Put files (somewhere) in same folder.
+two things:
 
-Save `uwu.el` and `uwu-graphics-v2.el` somewhere nice in the same folder (:
+### 0 - release several simplified variations for Version 3
 
-## 2. Run the game (:
+i may release version 3 as several different variations, to allow
+people to experience the life-cycles of different pet species
+discretely. the original tamagotchi had six different shell colours,
+indicating six different species. this would not mean that there would
+be growth/evolution, however. i may experiment with
+networking/internet connectivity if this is the case, because it would
+simplify the game significantly.
 
-```
-M-x load-file uwu.el
-```
-(`uwu.el` now contains code to automatically load the graphics package)
+from the wiki:
 
-Then, open a blank buffer, like `*scratch*` (for instance) and type:
+- one baby variation
+- one child variation
+- two teen variations
+- six adult variations
+- one ‘special character’ that evolves from one particular adult variation.
 
-```
-M-x uwu-mode
-```
+how would networking function? i am not sure. i need to do some
+exploration on that topic. if anyone has any suggestions, i am open to
+listening (:
 
-## 3. Understanding the game.
+### 1 - adopt original tamagotchi timing for Version 3
 
-Observe the following image:
+i will probably adopt the ‘timing schedule’ of pet growth of the
+original tamagotchi. from the [tamagotchi wiki](https://tamagotchi.fandom.com/wiki/Tamagotchi_(1996_Pet)#Growth,_Care,_and_Lifespan):
 
-![](https://img.itch.zone/aW1nLzg2NDU3MzEucG5n/original/tnMX9I.png)
+> Five minutes after the clock is set, the Tamagotchi will be born,
+> and will go through several stages of life. It begins with the Baby
+> stage and evolves to the Child stage after 65 minutes. It will
+> evolve into a teen at the age of 3, and into an adult by the age of
+> 6.
 
-Line 247 in the image **contains your pet's hearts**. You replenish
-your pet's hearts by executing:
+this means:
 
-```
-M-x uwu-feed
-```
+- egg hatches after 5 mins
+- baby turns into child after 65 mins
+- child becomes teen after 3 days
+- teen becomes adult after 6 days
 
-Lines 242 and 243 **contain your pet's poops**. Clean your pet's poops
-away by executing:
+so each stage lasts:
 
-```
-M-x uwu-clean-up
-```
-
-When you start the game, your 'high score' will, at first, equal
--10 (negative ten). Do not worry! This is normal! Your pet will not
-hatch from its egg until your 'high score' reaches 0 (zero).
-
-## 4. ???
-
-## 5. UwU
+- egg (5 mins)
+- baby (65 mins)
+- child (3 days)
+- teen (6 days)
+- adult (dependent on user care for pet)
