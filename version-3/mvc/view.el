@@ -51,10 +51,46 @@
 
     (terpri (get-buffer "*uwu*"))
 
-    (princ
-     (concat "messages: "
-	     *uwu-player-messages*)
-     (get-buffer "*uwu*"))))
+    (princ "messages: " (get-buffer "*uwu*"))
+    (princ *uwu-player-messages* (get-buffer "*uwu*"))
+
+    (princ "hunger: " (get-buffer "*uwu*"))
+    (princ *hungry* (get-buffer "*uwu*"))
+
+    (princ "asleep: " (get-buffer "*uwu*"))
+     
+    (princ   *asleep* (get-buffer "*uwu*"))
+
+    (princ "lights: " (get-buffer "*uwu*"))
+    (princ *lights* (get-buffer "*uwu*"))
+
+    (princ "attention: " (get-buffer "*uwu*"))
+    (princ *attention* (get-buffer "*uwu*"))
+
+    (princ "attention-flag: " (get-buffer "*uwu*"))
+    (princ *attention-flag* (get-buffer "*uwu*"))
+    
+    ))
+     
+
+;; (princ
+;;      (concat "attention flag: "
+;; 	     *attention-flag*)
+;;      (get-buffer "*uwu*"))
+
+;; (princ
+;;      (concat "neglect: "
+;; 	     *neglect*)
+;;      (get-buffer "*uwu*"))
+
+;; (princ
+;;      (concat "free-neglects: "
+;; 	     *free-neglects*)
+;;      (get-buffer "*uwu*"))
+;; (princ
+;;      (concat "character: "
+;; 	     *character*)
+	  ;;      (get-buffer "*uwu*"))
 
 ;; ┌─┐┌─┐┌┬┐  ┌─┐┌─┐┬  ┌─┐┌─┐┌─┐
 ;; ├─┘├┤  │   ├─┤└─┐│  ├┤ ├┤ ├─┘

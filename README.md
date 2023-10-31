@@ -9,7 +9,10 @@ Version 3.
 
 By: ~vidak
 
-(mailto:vidak@riseup.net)[vidak@riseup.net]
+[vidak@riseup.net](mailto:vidak@riseup.net)
+[@vidak:matrix.kaczynski.life]()
+[@vidak@zoinks.one]()
+
 
 # DESCRIPTION
 
@@ -36,7 +39,7 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
 General Public License for more details.
 ```
 
-(https://www.gnu.org/licenses/quick-guide-gplv3.html)[A quick guide to the GNU GPL v3.]
+[A quick guide to the GNU GPL v3.](https://www.gnu.org/licenses/quick-guide-gplv3.html)
 
 # README
 
