@@ -29,10 +29,27 @@
     +adult-chaotic-4+
     +adult-chaotic-5+))
 
+(defconst +toilet-list+
+  (list
+  '(4 +four-toilets+)
+  '(3 +three-toilets+)
+  '(2 +two-toilets+)
+  '(1 +one-toilet+)
+  '(0 +zero-toilets+)))
+
+(defconst +heart-list+
+  (list
+  '(4 +four-hearts+)
+  '(3 +three-hearts+)
+  '(2 +two-hearts+)
+  '(1 +one-heart+)
+  '(0 +zero-hearts+)))
+
 ;; ┬  ┬┌─┐┬─┐┬┌─┐┌┐ ┬  ┌─┐┌─┐
 ;; └┐┌┘├─┤├┬┘│├─┤├┴┐│  ├┤ └─┐
 ;;  └┘ ┴ ┴┴└─┴┴ ┴└─┘┴─┘└─┘└─┘
 
+(defvar *movement* 0)
 (defvar *character* +egg+)
 (defvar *hearts* 4) ; this meter decreases with neglect
 (defvar *hungry* 4) ; this meter decreases with hunger

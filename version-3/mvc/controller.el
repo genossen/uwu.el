@@ -215,9 +215,9 @@
   (blank-and-draw-frame (uwu-character-gfx-lookup character)))
 
 (defun blank-and-draw-frame (character)
-  (set-buffer "*uwu*")
+  (set-buffer "*uwu*") ; create if buffer does not exist.
   (erase-buffer)
-  (pet-movement character))
+  (pet-idle-movement character))
 
 (defun uwu-character-gfx-lookup (character)
   (assoc 'gfx character))

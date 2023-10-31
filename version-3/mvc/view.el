@@ -44,7 +44,7 @@
 
     (princ "╚═════════════════════╝" (get-buffer "*uwu*"))
 
-;;    (terpri (get-buffer "*uwu*"))
+    (terpri (get-buffer "*uwu*"))
 
     (princ (symbol-value (nth 1 (assoc *hearts* +heart-list+)))
 	   (get-buffer "*uwu*"))
