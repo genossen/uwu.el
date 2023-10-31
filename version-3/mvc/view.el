@@ -54,30 +54,56 @@
     (princ "messages: " (get-buffer "*uwu*"))
     (princ *uwu-player-messages* (get-buffer "*uwu*"))
 
+       (terpri (get-buffer "*uwu*"))
+
     (princ "hunger: " (get-buffer "*uwu*"))
     (princ *hungry* (get-buffer "*uwu*"))
 
+
+       (terpri (get-buffer "*uwu*"))
     (princ "asleep: " (get-buffer "*uwu*"))
      
     (princ   *asleep* (get-buffer "*uwu*"))
 
+   (terpri (get-buffer "*uwu*"))
+    
     (princ "lights: " (get-buffer "*uwu*"))
     (princ *lights* (get-buffer "*uwu*"))
 
+   (terpri (get-buffer "*uwu*"))
+    
     (princ "attention: " (get-buffer "*uwu*"))
     (princ *attention* (get-buffer "*uwu*"))
 
+   (terpri (get-buffer "*uwu*"))
+    
     (princ "attention-flag: " (get-buffer "*uwu*"))
     (princ *attention-flag* (get-buffer "*uwu*"))
 
+   (terpri (get-buffer "*uwu*"))
+    
     (princ "neglect: " (get-buffer "*uwu*"))
     (princ *neglect* (get-buffer "*uwu*"))
 
+   (terpri (get-buffer "*uwu*"))
+    
     (princ "free neglects: " (get-buffer "*uwu*"))
     (princ *free-neglects* (get-buffer "*uwu*"))
 
+   (terpri (get-buffer "*uwu*"))
+    
     (princ "character: " (get-buffer "*uwu*"))
     (princ *character* (get-buffer "*uwu*"))
+
+   (terpri (get-buffer "*uwu*"))
+
+    (princ "hearts: " (get-buffer "*uwu*"))
+    (princ *hearts* (get-buffer "*uwu*"))
+
+  (terpri (get-buffer "*uwu*"))
+    
+    (princ "poops: " (get-buffer "*uwu*"))
+    (princ *toilet* (get-buffer "*uwu*"))
     
     ))
      
