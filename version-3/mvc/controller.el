@@ -179,7 +179,7 @@
 ;; ┴ ┴ ┴  ┴ └─┘┘└┘ ┴ ┴└─┘┘└┘
 
 (defun uwu-attention-timer ()
-  (run-with-timer +fifteen-minutes+ +fifteen-minutes+ #'uwu-handle-attention *attention*))
+  (run-with-timer +fifteen-minutes+ +fifteen-minutes+ (uwu-handle-attention *attention*)))
 
 ;; ╦ ╦╔═╗╔═╗╦═╗ 
 ;; ║ ║╚═╗║╣ ╠╦╝ 
@@ -190,7 +190,7 @@
 
 (defun uwu-feed ()
   (interactive)
-  (if (< *hearts* 4)
+  (unless (= *hearts* 4)
   (cl-incf *hearts*))) ; feeding now only fills one heart at a time.
 
 (defun uwu-clean-up ()    
