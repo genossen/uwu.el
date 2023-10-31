@@ -69,14 +69,18 @@
 
     (princ "attention-flag: " (get-buffer "*uwu*"))
     (princ *attention-flag* (get-buffer "*uwu*"))
+
+    (princ "neglect: " (get-buffer "*uwu*"))
+    (princ *neglect* (get-buffer "*uwu*"))
+
+    (princ "free neglects: " (get-buffer "*uwu*"))
+    (princ *free-neglects* (get-buffer "*uwu*"))
+
+    (princ "character: " (get-buffer "*uwu*"))
+    (princ *character* (get-buffer "*uwu*"))
     
     ))
      
-
-;; (princ
-;;      (concat "attention flag: "
-;; 	     *attention-flag*)
-;;      (get-buffer "*uwu*"))
 
 ;; (princ
 ;;      (concat "neglect: "
