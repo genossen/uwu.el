@@ -190,8 +190,8 @@
 
 (defun uwu-feed ()
   (interactive)
-  (unless (= *hearts* 4)
-  (cl-incf *hearts*))) ; feeding now only fills one heart at a time.
+  (when (< *hungry* 4)
+  (cl-incf *hungry*))) ; feeding now only fills one heart at a time.
 
 (defun uwu-clean-up ()    
   (interactive)
