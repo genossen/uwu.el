@@ -94,30 +94,24 @@
    ;; when awake, and lights on. (correct care)
    
    ((and (equal *asleep* nil) (equal *lights* t)) 
-    (setf *uwu-player-messages* ""))
+    (setf *uwu-player-messages* "awake and groovin, uwu~"))
 
    ;; when asleep, and lights on. (neglectful care)
    
    ((and (equal *asleep* t) (equal *lights* t))
-    (setf *attention* t))
+    (setf *attention* t)
+    (setf *uwu-player-messages* "turn the lights off please~"))
 
    ;; when asleep, and lights off. (correct care)
 
    ((and (equal *asleep* t) (equal *lights* nil))
-    (setf *uwu-player-messages* ""))
+    (setf *uwu-player-messages* "Zzzz Zzz"))
 
    ;; when awake, and lights off. (neglectful care)
       
    ((and (equal *asleep* nil) (equal *lights* nil))
-    (setf *attention* t))))
-  
-
-;; ┬  ┬┌─┐┬ ┬┌┬┐
-;; │  ││ ┬├─┤ │ 
-;; ┴─┘┴└─┘┴ ┴ ┴ 
-
-;; need function for alerting user to turn off/on light upon sleep
-;; state changing
+    (setf *attention* t)
+    (setf *uwu-player-messages* "it's so dark in here!"))))
 
 
 
@@ -297,13 +291,3 @@
 
 (defun uwu-attention-flag-down ()
   (setf *attention-flag* nil))
-
-  
-
-;; - cl-incf neglect if asleep and lights on
-;; - 
-
-(defun uwu-handle-hunger ()
-  (unless
-      (equal *attention-flag* t)
-    )

@@ -68,5 +68,5 @@
 ;; │ ┬├─┤│││├┤ └─┐
 ;; └─┘┴ ┴┴ ┴└─┘└─┘
 
-;; light or right
+;; left or right
 ;; higher or lower
