@@ -7,19 +7,20 @@
 
 Version 3.
 
-_Version 3 is currently under development, as of 2023-10-24._
-
 By: ~vidak
 
-=> mailto:vidak@riseup.net vidak@riseup.net
+(mailto:vidak@riseup.net)[vidak@riseup.net]
 
 # DESCRIPTION
 
 This is a virtual pet for GNU Emacs. You can feed, clean, and play
-with your pet. There are, in all, 39 different 'evolutions' of pet.
+with your pet. There are, in all, 10 different 'evolutions' of pet.
 
 Looking after your pet well will make it live longer, and allow you to
 evolve into a final 'secret' pet species.
+
+This time around, the care that you put into looking after your pet
+determines whether it becomes 'chaotic' or 'lawful'.
 
 # LICENCE
 
@@ -35,25 +36,28 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
 General Public License for more details.
 ```
 
-=> https://www.gnu.org/licenses/quick-guide-gplv3.html A quick guide to the GNU GPL v3.
+(https://www.gnu.org/licenses/quick-guide-gplv3.html)[A quick guide to the GNU GPL v3.]
 
 # README
 
-## Version 3 Development Log
-
 ## Version 3 Will Feature Several Discrete Variations
 
-> 2022-September-19.
-> ~ 1700 HRS
+> 2023-November-1.
+> ~ 0225 HRS
+
+### 0 - Introductions
 
 the [tamagotchi fandom
 wiki](https://tamagotchi.fandom.com/wiki/Tamagotchi_(1996_Pet)) has
 improved markedly over the last few months, and now includes more
 information about how the original tamagotchi game functions.
 
+Because of their excellent documentation, I was able to more
+accurately simulate a virtual pet in Emacs Lisp.
+
 two things:
 
-### 0 - release several simplified variations for Version 3
+### 1 - release several simplified variations for Version 3
 
 i may release version 3 as several different variations, to allow
 people to experience the life-cycles of different pet species
@@ -75,7 +79,7 @@ how would networking function? i am not sure. i need to do some
 exploration on that topic. if anyone has any suggestions, i am open to
 listening (:
 
-### 1 - adopt original tamagotchi timing for Version 3
+### 2 - adopt original tamagotchi timing for Version 3
 
 i will probably adopt the ‘timing schedule’ of pet growth of the
 original tamagotchi. from the [tamagotchi wiki](https://tamagotchi.fandom.com/wiki/Tamagotchi_(1996_Pet)#Growth,_Care,_and_Lifespan):
@@ -100,3 +104,31 @@ so each stage lasts:
 - child (3 days)
 - teen (6 days)
 - adult (dependent on user care for pet)
+
+## How to get
+
+```
+git clone https://git.sr.ht/~vidak/uwu.el
+```
+
+## How to run
+
+```
+M-x ielm
+```
+
+then:
+
+```
+ELISP> (load "path-to/uwu.el/version-3/gfx/chaotic/pack-0.el")
+ELISP> (load "path-to/uwu.el/version-3/mvc/controller.el")
+ELISP> (load "path-to/uwu.el/version-3/mvc/model.el")
+ELISP> (load "path-to/uwu.el/version-3/mvc/view.el")
+```
+
+then:
+
+```
+ELISP> (uwu-init) ;; this will wipe your game.
+ELISP> (uwu-main-loop)
+```
