@@ -35,7 +35,8 @@
 (defun uwu-hunger ()
   (unless
       (= *hungry* 0)
-    (setf *hungry* (- *hungry* 1)))
+    (setf *hungry* (- *hungry* 1))
+    (setf *attention* nil))
   
   (when
       (= *hungry* 0)
@@ -51,7 +52,8 @@
 (defun uwu-toilet ()
   (unless
       (= *toilet* 4)
-    (setf *toilet* (+ *toilet* 1)))
+    (setf *toilet* (+ *toilet* 1))
+    (setf *attention* nil))
   
   (when
       (= *toilet* 4)
