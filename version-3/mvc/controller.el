@@ -179,7 +179,7 @@
 ;; ┴ ┴ ┴  ┴ └─┘┘└┘ ┴ ┴└─┘┘└┘
 
 (defun uwu-attention-timer ()
-  (run-with-timer +fifteen-minutes+ +fifteen-minutes+ (uwu-handle-attention *attention*)))
+  (run-with-timer +fifteen-minutes+ +fifteen-minutes+ #'uwu-handle-attention '*attention*))
 
 ;; ╦ ╦╔═╗╔═╗╦═╗ 
 ;; ║ ║╚═╗║╣ ╠╦╝ 
