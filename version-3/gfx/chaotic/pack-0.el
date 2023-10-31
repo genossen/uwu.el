@@ -149,3 +149,91 @@
 	"Ψ( ;Φ‿Φ)_↑" ;; right-moving	
 	"↑_(Φ‿Φ;)Ψ");; left-moving
    '(name "akuma")))
+
+;; ┬ ┬┌─┐┌─┐┬─┐┌┬┐┌─┐
+;; ├─┤├┤ ├─┤├┬┘ │ └─┐
+;; ┴ ┴└─┘┴ ┴┴└─ ┴ └─┘
+
+(defconst +four-hearts+
+"
+     ♥♥♥♥♥♥♥♥
+")
+
+(defconst +three-and-half-hearts+
+"
+     ♥♥♥♥♥♥♥♡
+")
+
+(defconst +three-hearts+
+"
+     ♥♥♥♥♥♥♡♡
+")
+
+(defconst +two-and-half-hearts+
+"
+     ♥♥♥♥♥♡♡♡
+")
+
+(defconst +two-hearts+
+"
+     ♥♥♥♥♡♡♡♡
+")
+
+(defconst +one-and-half-hearts+
+"
+     ♥♥♥♡♡♡♡♡
+")
+
+(defconst +one-heart+
+"
+     ♥♥♡♡♡♡♡♡
+"
+)
+
+(defconst +half-heart+
+"
+     ♥♡♡♡♡♡♡♡
+")
+
+(defconst +zero-hearts+
+"
+     ♡♡♡♡♡♡♡♡
+
+hungry~!
+
+(don't forget to
+   M-x uwu-feed!)
+")
+
+
+;; ┌┬┐┌─┐┬┬  ┌─┐┌┬┐┌─┐
+;;  │ │ │││  ├┤  │ └─┐
+;;  ┴ └─┘┴┴─┘└─┘ ┴ └─┘
+
+(defconst +zero-toilets+
+"
+")
+
+(defconst +one-toilet+
+"
+       ς
+       Δ
+")
+
+(defconst +two-toilets+
+"
+       ς  ξ
+       Δ  Δ
+")
+
+(defconst +three-toilets+
+"
+       ς  ξ  ς
+       Δ  Δ  Δ
+")
+
+(defconst +four-toilets+
+  "
+       ς  ξ  ς  ξ  (don't forget to
+       Δ  Δ  Δ  Δ  M-x uwu-clean-up!)
+")
