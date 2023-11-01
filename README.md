@@ -10,8 +10,10 @@ Version 3.
 By: ~vidak
 
 [vidak@riseup.net](mailto:vidak@riseup.net)
-[@vidak:matrix.kaczynski.life]()
-[@vidak@zoinks.one]()
+
+[@vidak:matrix.kaczynski.life](#social:matrix.kaczynski.life)
+
+[@vidak@zoinks.one](https://zoinks.one/users/vidak)
 
 
 # DESCRIPTION
@@ -135,3 +137,5 @@ then:
 ELISP> (uwu-init) ;; this will wipe your game.
 ELISP> (uwu-main-loop)
 ```
+
+![](version-3/uwu-v3-demo-video-2023-11-01_10.39.35.mp4)
