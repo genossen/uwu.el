@@ -11,7 +11,7 @@ By: ~vidak
 
 [vidak@riseup.net](mailto:vidak@riseup.net)
 
-[@vidak:matrix.kaczynski.life](#social:matrix.kaczynski.life)
+@vidak:matrix.kaczynski.life
 
 [@vidak@zoinks.one](https://zoinks.one/users/vidak)
 
