@@ -138,4 +138,6 @@ ELISP> (uwu-init) ;; this will wipe your game.
 ELISP> (uwu-main-loop)
 ```
 
-[](uwu-v3-demo-video-00.mp4)
+[video 00](uwu-v3-demo-video-00.mp4)
+
+[video 01](uwu-v3-demo-video-01.mp4)
