@@ -23,12 +23,12 @@
 	   (incf *movement*)))
 
     (princ (symbol-value (nth 1 (assoc *toilet* +toilet-list+)))
-	   (get-buffer "*uwu*"))
+	   (get-buffer-create "*uwu*"))
 
-;;    (terpri (get-buffer "*uwu*"))
+;;    (terpri (get-buffer-create "*uwu*"))
     
-    (princ "╔═════════════════════╗" (get-buffer "*uwu*"))
-    (terpri (get-buffer "*uwu*"))
+    (princ "╔═════════════════════╗" (get-buffer-create "*uwu*"))
+    (terpri (get-buffer-create "*uwu*"))
     
     (princ
      (concat 
@@ -37,73 +37,73 @@
       (nth
        rng-move
        (cdr pet-gfx)))
-     (get-buffer "*uwu*"))
+     (get-buffer-create "*uwu*"))
     
-    (terpri (get-buffer "*uwu*"))
+    (terpri (get-buffer-create "*uwu*"))
         
 
-    (princ "╚═════════════════════╝" (get-buffer "*uwu*"))
+    (princ "╚═════════════════════╝" (get-buffer-create "*uwu*"))
 
-    (terpri (get-buffer "*uwu*"))
+    (terpri (get-buffer-create "*uwu*"))
 
     (princ (symbol-value (nth 1 (assoc *hearts* +heart-list+)))
-	   (get-buffer "*uwu*"))
+	   (get-buffer-create "*uwu*"))
 
-    (terpri (get-buffer "*uwu*"))
+    (terpri (get-buffer-create "*uwu*"))
 
-    (princ "messages: " (get-buffer "*uwu*"))
-    (princ *uwu-player-messages* (get-buffer "*uwu*"))
+    (princ "messages: " (get-buffer-create "*uwu*"))
+    (princ *uwu-player-messages* (get-buffer-create "*uwu*"))
 
-       (terpri (get-buffer "*uwu*"))
+       (terpri (get-buffer-create "*uwu*"))
 
-    (princ "hunger: " (get-buffer "*uwu*"))
-    (princ *hungry* (get-buffer "*uwu*"))
+    (princ "hunger: " (get-buffer-create "*uwu*"))
+    (princ *hungry* (get-buffer-create "*uwu*"))
 
 
-       (terpri (get-buffer "*uwu*"))
-    (princ "asleep: " (get-buffer "*uwu*"))
+       (terpri (get-buffer-create "*uwu*"))
+    (princ "asleep: " (get-buffer-create "*uwu*"))
      
-    (princ   *asleep* (get-buffer "*uwu*"))
+    (princ   *asleep* (get-buffer-create "*uwu*"))
 
-   (terpri (get-buffer "*uwu*"))
+   (terpri (get-buffer-create "*uwu*"))
     
-    (princ "lights: " (get-buffer "*uwu*"))
-    (princ *lights* (get-buffer "*uwu*"))
+    (princ "lights: " (get-buffer-create "*uwu*"))
+    (princ *lights* (get-buffer-create "*uwu*"))
 
-   (terpri (get-buffer "*uwu*"))
+   (terpri (get-buffer-create "*uwu*"))
     
-    (princ "attention: " (get-buffer "*uwu*"))
-    (princ *attention* (get-buffer "*uwu*"))
+    (princ "attention: " (get-buffer-create "*uwu*"))
+    (princ *attention* (get-buffer-create "*uwu*"))
 
-   (terpri (get-buffer "*uwu*"))
+   (terpri (get-buffer-create "*uwu*"))
     
-    (princ "attention-flag: " (get-buffer "*uwu*"))
-    (princ *attention-flag* (get-buffer "*uwu*"))
+    (princ "attention-flag: " (get-buffer-create "*uwu*"))
+    (princ *attention-flag* (get-buffer-create "*uwu*"))
 
-   (terpri (get-buffer "*uwu*"))
+   (terpri (get-buffer-create "*uwu*"))
     
-    (princ "neglect: " (get-buffer "*uwu*"))
-    (princ *neglect* (get-buffer "*uwu*"))
+    (princ "neglect: " (get-buffer-create "*uwu*"))
+    (princ *neglect* (get-buffer-create "*uwu*"))
 
-   (terpri (get-buffer "*uwu*"))
+   (terpri (get-buffer-create "*uwu*"))
     
-    (princ "free neglects: " (get-buffer "*uwu*"))
-    (princ *free-neglects* (get-buffer "*uwu*"))
+    (princ "free neglects: " (get-buffer-create "*uwu*"))
+    (princ *free-neglects* (get-buffer-create "*uwu*"))
 
-   (terpri (get-buffer "*uwu*"))
+   (terpri (get-buffer-create "*uwu*"))
     
-    (princ "character: " (get-buffer "*uwu*"))
-    (princ *character* (get-buffer "*uwu*"))
+    (princ "character: " (get-buffer-create "*uwu*"))
+    (princ *character* (get-buffer-create "*uwu*"))
 
-   (terpri (get-buffer "*uwu*"))
+   (terpri (get-buffer-create "*uwu*"))
 
-    (princ "hearts: " (get-buffer "*uwu*"))
-    (princ *hearts* (get-buffer "*uwu*"))
+    (princ "hearts: " (get-buffer-create "*uwu*"))
+    (princ *hearts* (get-buffer-create "*uwu*"))
 
-  (terpri (get-buffer "*uwu*"))
+  (terpri (get-buffer-create "*uwu*"))
     
-    (princ "poops: " (get-buffer "*uwu*"))
-    (princ *toilet* (get-buffer "*uwu*"))
+    (princ "poops: " (get-buffer-create "*uwu*"))
+    (princ *toilet* (get-buffer-create "*uwu*"))
     
     ))
      
@@ -111,16 +111,16 @@
 ;; (princ
 ;;      (concat "neglect: "
 ;; 	     *neglect*)
-;;      (get-buffer "*uwu*"))
+;;      (get-buffer-create "*uwu*"))
 
 ;; (princ
 ;;      (concat "free-neglects: "
 ;; 	     *free-neglects*)
-;;      (get-buffer "*uwu*"))
+;;      (get-buffer-create "*uwu*"))
 ;; (princ
 ;;      (concat "character: "
 ;; 	     *character*)
-	  ;;      (get-buffer "*uwu*"))
+	  ;;      (get-buffer-create "*uwu*"))
 
 ;; ┌─┐┌─┐┌┬┐  ┌─┐┌─┐┬  ┌─┐┌─┐┌─┐
 ;; ├─┘├┤  │   ├─┤└─┐│  ├┤ ├┤ ├─┘
