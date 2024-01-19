@@ -11,7 +11,7 @@ By: ~vidak
 
 [vidak@riseup.net](mailto:vidak@riseup.net)
 
-@vidak:matrix.kaczynski.life
+`@vidak:matrix.kaczynski.life`
 
 [@vidak@zoinks.one](https://zoinks.one/users/vidak)
 
@@ -119,24 +119,24 @@ git clone https://git.sr.ht/~vidak/uwu.el
 ## How to run
 
 ```
-M-x ielm
+M-x load-file elpa/uwu.el
 ```
 
 then:
 
 ```
-ELISP> (load "path-to/uwu.el/version-3/gfx/chaotic/pack-0.el")
-ELISP> (load "path-to/uwu.el/version-3/mvc/controller.el")
-ELISP> (load "path-to/uwu.el/version-3/mvc/model.el")
-ELISP> (load "path-to/uwu.el/version-3/mvc/view.el")
+M-x uwu-mode
 ```
 
-then:
+be careful! this will nuke your pet! do NOT use this command to find
+the buffer where your pet lives. if you have started a pet and lost
+the buffer, use:
 
 ```
-ELISP> (uwu-init) ;; this will wipe your game.
-ELISP> (uwu-main-loop)
+C-x b *uwu*
 ```
+
+to find it again (:
 
 [video 00](uwu-v3-demo-video-00.mp4)
 
