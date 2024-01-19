@@ -218,7 +218,7 @@
 
 (defun blank-and-draw-frame (character)
   (get-buffer-create "*uwu*") ; create if buffer does not exist.
-  (erase-buffer)
+  (with-current-buffer "*uwu*" (erase-buffer))
   (pet-idle-movement character))
 
 (defun uwu-character-gfx-lookup (character)
