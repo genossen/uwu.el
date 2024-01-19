@@ -40,12 +40,12 @@
 
 ;;; Code:
 
-(load "../gfx/chaotic/pack-0.el")
-(load "../mvc/controller.el")
-(load "../mvc/model.el")
-(load "../mvc/view.el")
+(load-file "../gfx/chaotic/pack-0.el")
+(load-file "../mvc/controller.el")
+(load-file "../mvc/model.el")
+(load-file "../mvc/view.el")
 
-(require 'uwu-pet-view)
+
 
 ;; ┌┬┐┌─┐ ┬┌─┐┬─┐ 
 ;; │││├─┤ ││ │├┬┘ 

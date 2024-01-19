@@ -3,6 +3,8 @@
 ;; ║║║║ ║ ║║║╣ ║  
 ;; ╩ ╩╚═╝═╩╝╚═╝╩═╝
 
+(provide 'uwu-pet-model)
+
 ;; ┌─┐┌─┐┌┐┌┌─┐┌┬┐┌─┐┌┐┌┌┬┐┌─┐
 ;; │  │ ││││└─┐ │ ├─┤│││ │ └─┐
 ;; └─┘└─┘┘└┘└─┘ ┴ ┴ ┴┘└┘ ┴ └─┘
@@ -62,5 +64,3 @@
 (defvar *illness* nil)
 (defvar *free-neglects* 0)
 (defvar *uwu-player-messages* "Welcome to uwu.el~")
-
-(provide 'uwu-pet-model)

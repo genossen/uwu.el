@@ -11,7 +11,9 @@
 ;; ╚═╝╩ ╩╩ ╩╚═╝ ╩ ╩╚═╝   
 
 ;; pack 0.
-;; first of three. 
+;; first of three.
+
+(provide 'uwu-graphics-v3)
 
 ;; ┌─┐┌─┐┌─┐
 ;; ├┤ │ ┬│ ┬
@@ -219,4 +221,4 @@
        Δ  Δ  Δ  Δ  M-x uwu-clean-up!)
 ")
 
-(provide 'uwu-graphics-v3)
+
