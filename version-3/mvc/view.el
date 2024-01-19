@@ -3,6 +3,9 @@
 ;; ╚╗╔╝║║╣ ║║║╚═╗
 ;;  ╚╝ ╩╚═╝╚╩╝╚═╝
 
+(require 'uwu-pet-controller)
+(require 'uwu-pet-model)
+
 ;; ┌─┐┌─┐┌┬┐  ┬┌┬┐┬  ┌─┐
 ;; ├─┘├┤  │   │ │││  ├┤ 
 ;; ┴  └─┘ ┴   ┴─┴┘┴─┘└─┘
@@ -138,3 +141,5 @@
 
 ;; left or right
 ;; higher or lower
+
+(provide 'uwu-pet-view)
