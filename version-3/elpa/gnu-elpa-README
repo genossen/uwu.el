@@ -1,0 +1,630 @@
+#+TITLE: GNU ELPA README
+#+DATE: 2022-10-26
+
+Copyright (C) 2010-2022 Free Software Foundation, Inc. \\
+See the end of the file for license conditions.
+
+#+BEGIN_COMMENT
+This file exists in two branches ~elpa-admin~ and ~elpa~.  The two version
+differ slightly.  The introductory text before the first heading
+differs and there are minor differences concerning the ~externals/*~ to
+~elpa/*~ transition.  Please make sure you always update this file in
+both locations to avoid introducing additional differences.  This
+duplication will be removed eventually.
+#+END_COMMENT
+
+This repository contains the sources, deployment scripts, and
+auxiliary files for [[https://elpa.gnu.org/][GNU ELPA]].  GNU ELPA is a [[https://www.gnu.org/philosophy/free-sw.html][free software]] Emacs Lisp
+Package Archive (ELPA) with extensions to [[https://www.gnu.org/software/emacs/][GNU Emacs]].
+
+This file explains the repository layout, how to add and edit
+packages, and how to deploy the archive (either on =elpa.gnu.org=,
+or a local copy for testing purposes).
+
+* Repository layout of elpa.git
+
+The layout of the =elpa.git= repository is as follows:
+
+- The =main= branch holds the list of specifications of the packages
+  included.  It does not hold the scripts to build them.
+
+- The copy of the code for a package =<pkg-name>= is not kept in
+  =main= but in a branch named =externals/<pkg-name>=.
+  Package branches are normally placed as git worktrees in the
+  subdirectory =packages/<pkg-name>= (see below).
+
+- The package archive deployment scripts are in the =elpa-admin=
+  branch.  This branch is normally put as a git worktree in the
+  =admin= subdirectory.
+
+* Getting the source
+
+Start with source that is cloned directly from Savannah
+(See [[https://savannah.gnu.org/git/?group=emacs][the Savannah page]] and look for "ELPA").
+Using a clone of a clone might not work.
+
+The repository is large because it contains all the packages, so you
+will usually want to clone with =--single-branch= to avoid downloading
+a large amount of irrelevant data.  More specifically, here is how you
+can get the source and setup the general infrastructure:
+
+#+begin_src shell
+  git clone --single-branch git://git.savannah.gnu.org/emacs/elpa.git
+  cd elpa
+  make
+#+end_src
+
+Where the =Makefile= in the =main= branch is used to automatically
+pull the =elpa-admin= branch to populate the =admin= subdirectory.
+
+However, it leaves the =packages= directory empty; you must check out
+the ones you want.
+
+** Check out all packages
+
+If you wish to check out all the packages into the =packages=
+directory, you can run the command:
+
+#+begin_src shell
+   make worktrees
+#+end_src
+
+** Check out specific package
+
+You can check out a specific package =<pkgname>= into the =packages=
+directory with this command:
+
+#+begin_src
+   make packages/<pkgname>
+#+end_src
+
+The first time you run this command, it just populates that directory.
+After that, it will (re)"build" the package for use in-place, i.e. it will
+create (or refresh) the =<pkgname>-pkg.el= and  =<pkgname>-autoloads.el= files
+and (re)compile the ELisp files under the assumption that you have put
+=.../elpa/packages/= into your =package-directory-list=.
+
+** Updating a package directory
+
+If you already have a =packages/<pkgname>= directory with a previous
+checkout, you can update it like this:
+
+#+begin_src
+   cd packages/PACKAGE
+   git pull
+#+end_src
+
+* Directory layout
+
+This code expects to be used in a directory that has the following layout:
+
+- =admin/=              -- Directory containing a copy of the here files
+- =GNUmakefile=         -- A copy of or symlink to =admin/GNUmakefile=
+- =elpa-packages=       -- The specifications of the packages
+- =elpa-config=         -- Some configuration settings for the build scripts
+- =copyright_exceptions= -- List of exceptions for the copyright-notices checks
+
+The =copyright_exceptions= file can be absent, in which case copyright notices
+will simply not be checked.
+
+Additionally to the above, this code will then add to that directory
+the following elements:
+
+- =packages/=           -- Directory holding Git worktrees of packages
+- =archive/=            -- Directory holding the generated files for the archive
+- =archive-devel/=      -- Same for the "bleeding edge" version of the archive
+
+* Specifications (elpa-packages)
+
+The specifications of packages is a `lisp-data-mode` file containing
+a single Lisp list where each element describe a particular ELisp package
+that should be part of the archive.  Each element has the form
+
+    (NAME . PLIST)
+
+where NAME is the name of the ELisp package and PLIST is a property list
+giving additional info about that package.  It has to have either
+a =:url= or a =:core= property, all others are optional.
+The properties are the following:
+
+** =:url URL=
+This property has to come first.
+Gives the URL where the upstream Git repository for that package can be found.
+The URL can be =nil= if there is no upstream repository.
+
+** =:core FILES=
+This property has to come first.
+Indicates that this is a special package which will be built by extracting
+files directly from Emacs's source code.  For this to work, the Emacs
+source code should be available in the =emacs= subdirectory.
+FILES specifies the files that will be contained in the generated tarballs.
+It can be a single file name or a list of file names.
+
+** =:branch BRANCH=
+Specifies the branch to follow in the upstream Git repository, in case
+it should be different from the default branch.
+
+If there is no upstream (=:url= is nil), this is simply ignored.
+
+** =:lisp-dir=
+Subdirectory in which the main ELisp found are found.
+Defaults to the top-level directory.
+
+** =:main-file FILE=
+Gives the name of the main file of the package, i.e. the file in which
+the metadata can be found in the form of pseudo-headers like "Version:".
+It needs to be an ELisp file formatted following the proper conventions.
+This is normally the file [PKG].el in the LISP-DIR, but in some rare
+circumstances the file is named differently.
+
+** =:release-branch BRANCH=
+The upstream BRANCH from which releases are cut.  This is only used
+for those packages which have both a development branch and a release branch
+and only if the version number in the development branch indicates that it
+contains development code (i.e. a "snapshot" version, according to
+`version-to-list`).
+
+If there is no upstream (=:url= is nil), the presence of :release-branch
+just indicates that release and devel branches in elpa.git are desired
+(the name given in :release-branch is ignored). The release branch is
+named `externals-release/<pkg-name>' for GNU ELPA and
+`elpa-release/<pkg-name>` for NonGNU ELPA. The standard package branch
+externals/<pkg-name> is the devel branch in GNU ELPA; the standard
+branch elpa/<pkg-name> is the devel branch in non-GNU ELPA.
+
+** =:ignored-files FILES=
+Names of files or directories that should not be included in the tarballs.
+
+** =:renames RENAMES=
+Mapping from the source layout to the layout used in the tarball.
+RENAMES is a list of element (FROM TO) where FROM should terminate with =/=
+if it's a directory.
+If =:lisp-dir= is set, then that directory is renamed to =""= without
+having to specify it here.
+
+** =:readme FILE=
+Name of the file to use as the description of the package.  By default
+we try to use README, README.rst, README.org, or the Commentary section
+in the main file.  If ~ignore~, ignore any matching file and use the Commentary
+section.
+
+** =:news FILE=
+Name of the file that contains the list of changes in recent versions
+(listed from more recent to least recent).
+By default we try to use NEWS, NEWS.rst, NEWS.md, NEWS.org, the News section
+in the main file.
+
+** =:doc FILE=
+Name of the documentation file for the package.
+It can be either an Info file, a Texinfo file, or an Org file.
+FILE can also be a list of those.
+
+** =:make TARGET=
+Indicates that we should run ~make TARGET~ in order to build some files.
+This is run before processing =:doc=, so it can be used to generate
+the Info and Texinfo file from some other format.
+TARGET can also be a list, in which case each target should be
+an actual file name (rather than a "phony target").
+
+** =:shell-command COMMAND=
+If running =make= is not good enough, this lets you run the shell COMMAND
+to build (or modify, rename, delete, younameit) some of the files.
+
+** =:version-map MAP=
+A list of elements of the form (ORIG-VERSION REMAPPED-VERSION REVISION).
+This allows replacing the ORIG-VERSION from the [PKG].el file
+with REMAPPED-VERSION (e.g. because the ORIG-VERSION is not a valid
+version number, is missing, or because we want to create a new package
+from the same code version).
+It also makes it possible to specify which REVISION corresponds to
+this ORIG-VERSION (or REMAPPED-VERSION if non-nil) to override
+the default heuristic which uses the last revision that modified the
+"Version:" header.
+
+** =:merge BOOL=
+If non-nil, this setting indicates that syncs from upstream should use automatic
+merges instead of fast-forwards.
+This only works for the main branch, not for the release branch.
+An unnecessary =:merge= setting is considered as an error.
+
+This option has many shortcomings, so its use is discouraged: it is
+better avoided as much as possible.  Among other problems,  merges
+don't interact well with the algorithm used to determine which
+revision is a "release".
+
+* Configuration (elpa-config)
+
+The configuration file is a `lisp-data-mode` file containing
+a single Lisp list setting various options.  Each entry in the list is of
+the form
+
+    (NAME VALUE)
+
+where NAME is one of:
+** =name= The name of the ELPA archive, used in the HTML pages.
+** =url= The public URL of the ELPA archive.
+** =gitrepo=  The base URL of the Git repository holding the packages.
+** =branch-prefix= A prefix added to the packages's branches in the gitrepo.
+** =release-branch-prefix= Same but for the release branches.
+** =specs-file= Name of the specification file (default: =elpa-packages=).
+** =email-to= Email address to which to send announcement of new releases.
+** =email-from= Email address to use in the `From:` field.
+** =email-reply-to= Email address to use in the `Reply-To:` field.
+** =sandbox= If non-nil, use a `bwrap` sandbox to run commands (default: =t=).
+** =sandbox-extra-ro-dirs= Additional directories to make readable to `bwrap`.
+** =debug= If non-nil, emit more detailed messages.
+** =copyright-file= Name of a file containing copyright check exceptions.
+
+* Make targets
+
+** =all-in-place=
+This is the default target, and it prepares all the directories found in
+the =packages= subdirectory for use by =package.el=.  This assume you will
+want to add =.../packages= to your =package-directory-list= so as to treat
+those packages as installed "in place".
+
+** =packages/[PKGNAME]=
+Prepare the subdirectory =packages/[PKGNAME]= for use by =package.el=.
+If the directory does not exist yet, it checks it out as a Git worktree.
+Else, it generates the auxiliary files like =[PKGNAME]-pkg.el= and
+=[PKGNAME]-autoloads.el= and compiles the Elisp source files.
+
+** =[PKGNAME].tar=
+Build that tarball from the commit currently in =packages/[PKGNAME]=
+
+** =build/[PKGNAME]=
+Build the ELPA tarball(s) and other files like PKGNAME.html and
+PKGNAME.svg for PKGNAME.  The result is placed in the =archive= and
+=archive-devel= subdirectories.
+
+This can be used to test commentary and changelog extraction.
+
+** =build-all=
+Same as before but does it for all the packages listed in the
+=elpa-packages= file.
+
+** =fetch/[PKGNAME]=
+Fetch changes from the upstream repository of package PKGNAME.
+Does not apply them to anywhere, only keeps them in Git and shows
+a concise summary of the new commits compared to the current
+content of the archive.
+
+** =fetch-all=
+Same as before but fetches changes for all the packages listed in the
+=elpa-packages= file.
+
+** =sync/[PKGNAME]=
+Fetch changes from the upstream repository of package PKGNAME
+and push them to the corresponding branch in the main repository (such as
+=elpa.git=).
+
+** =sync-all=
+Same as before but does it for all the packages listed in the
+=elpa-packages= file.
+
+** =clean=
+Delete all the files generated by a plain =make=.
+
+** =clean/[PKGNAME]=
+Delete all the files generated by =make packages/[PKGNAME]=.
+
+* Text below this marker is OUTDATED and still needs to be reviewed/rewritten!!
+
+* Packages
+
+** Contents of the =packages/= directory:
+This directory holds the package sources, with one subdirectory for
+each package.
+
+Each directory in here corresponds to a package.
+
+A nightly cron job on the server hosting =elpa.gnu.org= refreshes the
+GNU ELPA archive from this repository.
+
+This cron job only creates a new package when the "version" (as specified in
+the =Version:= header) of a package is modified.  This means that you can
+safely work on the next version here without worrying about the unstable
+code making it to GNU ELPA, and simply update the =Version:= when you want to
+release the new code.
+
+** To add a package: (submission, submit)
+
+Adding a basic package is very simple.  There are thorough
+instructions below, but the gist of it is that you:
+
+1. Notify [[mailto:emacs-devel@gnu.org][emacs-devel@gnu.org]].
+2. Push your package's code to its branch on elpa.git with:
+
+   #+begin_src shell
+   git push elpa <mybranch>:refs/heads/externals/<pkgname>
+   #+end_src
+
+   where =<mybranch>= will probably be =master= for most people.
+   [ Note: The name "externals/" is the result of an accident of history.  ]
+
+3. Edit the =elpa-packages= file to add an entry for =<pkgname>=.
+   It has to have an =:url= property specified but that
+   property can be nil.
+4. =git add elpa-packages=, =git commit= and =git push=.
+
+If you don't have push access to the repository, someone will do steps
+2-4 for you.
+
+*** Notify emacs-devel@gnu.org
+
+There is no approval process for GNU ELPA packages.  Still,
+you must send an email to =emacs-devel= for several reasons:
+
+- Notifying other developers;
+- Making sure the package doesn't break FSF rules;
+- Checking if the package is not reinventing the wheel;
+- Ensuring that first-time developers are doing it right.
+
+Before doing anything, please ensure your package follows the
+conventions described in the [[Format]] section.  Then, send an email
+to the list with the subject:
+ :  [ELPA] New package: <pkg-name>
+
+Start your message with an explanation about the package.  A
+copy-paste of the package's =Summary= and =Commentary= is perfectly fine
+here, but you can write more or less than that if you'd like.
+
+In your message include the URL of a Git repository where your package can
+be found (or if that's not convenient and the package is small enough,
+include a copy of its code as an attachment).  If you prefer (and if you
+have push access), you can push your changes to a branch called
+=scratch/<pkg-name>=, and mention the branch in your message.
+
+After 48 hours, or once any issues have been addressed, someone will push
+your changes for you.  You should probably also subscribe to
+[[https://lists.gnu.org/mailman/listinfo/emacs-devel][emacs-devel@gnu.org]], since that's where we discuss about GNU ELPA, and
+to [[https://lists.gnu.org/mailman/listinfo/bug-gnu-emacs][bug-gnu-emacs@gnu.org]], since that's where people will report bugs
+about your package.
+
+*** Add a simple package as =<pkg-name>.el=.
+
+The file needs to follow the usual coding conventions (most importantly start
+with =";;; <file> --- <description> -*- lexical-binding: t -*-"=) and have a
+=Version:= and =Maintainer:= pseudo-header (see the [[Format]] subsection
+below).
+
+For some examples, see [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Simple-Packages.html][Simple Packages]] (web link) or in Emacs:
+#+begin_src elisp
+    (info "(elisp) Simple Packages")
+#+end_src
+
+*** Add a multi-file package as a directory
+
+It needs to have a file named =<pkg-name>/<pkg-name>.el= which follows the
+same rules as above.
+
+It additionally follows the same guidelines described in [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Multi_002dfile-Packages.html][Multi-File Packages]]
+(web link) or in Emacs
+#+begin_src elisp
+    (info "(elisp) Multi-file Packages")
+#+end_src
+with the exception that it is not a tar package (it's a plain
+directory) and it must not contain a =<pkg-name>-pkg.el= file (this
+will be created for you).
+
+*** Check the copyright
+
+Now run =make check_copyrights=.
+
+That command does a very crude check to try and catch the files which lack
+the usual license and copyright blurb (that's the role of the first =find=),
+and to catch the files which still have a "copyright <not-the-fsf>" somewhere.
+
+If your package fails that check, please fix the files accordingly.
+Of course, occasionally those checks misfire (for a few rare files which
+we admitted without their copyright being transferred to the FSF, or
+because the word "copyright" appears in the body of the file), in
+which case the right fix is to update the =copyright_exceptions= file.
+
+*** Commit your changes the usual way (=git add=, =git commit=, etc.)
+
+Changes in the Git repository do not immediately propagate to the
+user-facing archive (what users see when they do =M-x list-packages=).
+That is done by deploying the archive, which happens automatically
+once a day, and the changes are only reflected when the =Version:=
+header changes.
+
+** Format
+
+Each package should follow the ELPA packaging conventions, but there are
+some differences due to the way the deployment script creates the packages
+and the web-pages from this source code:
+- Multi-file packages put the package metadata in the main =<pkg-name>.el= file
+  in the format used for single-file packages: the =<pkg-name>-pkg.el= file is
+  auto-generated from it.
+- Every package should have both a =Version:= /and/ a =Maintainer:=.
+- The =Version:= must be acceptable to =version-to-list=.
+- The =URL:= header can be used to specify the home page
+  of the package, if it's maintained externally.
+- A =News:= section (or "NEWS" file) can/should be used to list the
+  user-visible changes of each version.
+- If you want some files to not be included in the tarball, you can
+  put a =.elpaignore= file in the root of your package directory, where you
+  can list patterns of files to ignore (this file is passed to =tar='s =-X=).
+
+** Coding style
+
+We do not impose a particular coding style on GNU ELPA packages, but of
+course we recommend the coding style used in Emacs's own source code.
+Furthermore we recommend the following:
+- Use =cl-lib= rather than =cl= if at all possible.
+- Use =lexical-binding= if at all possible.
+- Try and fix the warnings emitted when compiling the package with a recent Emacs.
+
+The Copyright notice should specify "Free Software Foundation, Inc." as
+the copyright holder.  Ensure that all the code has the proper copyright:
+if it is not your own code, make sure the author has signed the relevant
+copyright papers (for non-trivial contributions), and indicate the author
+correctly in the commit.
+
+** External branches
+
+A copy of the code of every package is kept in the =elpa.git= repository
+(not in the =main= branch) and if applicable should be sync'd with the
+upstream every once in a while.  This copy may include local changes,
+although these should be kept to a minimum.
+
+The copy of the code is not kept in =main= but in the
+=externals/<pkg-name>= branch in the =elpa.git= repository.
+[ Note: The name "externals/" is the result of an accident of history.  ]
+
+To add a new package, first add this =elpa.git= repository as a
+new remote in your existing repository.
+
+Then push a local branch to a new remote branch in =elpa.git=, named
+=externals/<pkgname>=.  For example:
+
+#+begin_src shell
+   git push elpa <mybranch>:refs/heads/externals/<pkgname>
+#+end_src
+
+For example, let's say that you want to add =realgud-ipdb= which is currently
+checked out in =$HOME/github/realgud-ipdb=:
+
+#+begin_src shell
+   cd $HOME/github/realgud-ipdb
+   git remote add elpa ${USER}@git.sv.gnu.org:/srv/git/emacs/elpa.git
+   git push elpa master:refs/heads/externals/realgud-ipdb
+#+end_src
+
+Then edit the =elpa-packages= file as mentioned above, add the line
+
+#+begin_src elisp
+   ("realgud-ipdb" :url "https://github.com/realgud/realgud-ipdb")
+#+end_src
+
+and push that change to the =main= branch of =elpa=.  After it's added to
+the =elpa-packages= file, the package can be maintained just by
+pushing changes to the =externals/<pkgname>= branch.
+
+** Public incubation
+
+If you want to develop a package publicly prior to its first release (to
+benefit from others' feedback, primarily), but not in an external repo,
+you have two choices:
+- you can simply put =Version: 0= to indicate that this should not be
+  released yet.
+- or you can push to an "ephemeral" branch -- subject to rebase and eventual
+  removal upon finishing merge -- for the duration of the incubation.
+
+* Deployment
+
+** To install all the packages "in place":
+
+#+begin_src shell
+   make worktrees
+   make
+#+end_src
+
+This compiles and generates autoloads for all the packages in the
+=packages/= directory.  You can then add that directory, e.g. with:
+
+#+begin_src elisp
+(eval-after-load 'package
+  '(add-to-list 'package-directory-list ".../elpa/packages"))
+#+end_src
+
+** To deploy the package repository as a remotely-accessible archive:
+
+#+begin_src shell
+   make build-all
+#+end_src
+
+This deploys the packages to the =archive/= subdirectory.
+Unlike =make=, this makes a full copy of the packages, tars up
+multi-file packages, and doesn't byte-compile any files.
+
+** To access a deployed archive
+
+To access the archive via HTTP, have a symlink (say) =/var/www/packages=
+pointing to the =archive/= subdirectory, and set up Emacs with
+
+#+begin_src elisp
+  (setq package-archives '(("new-elpa" . "https://foo.com/packages")))
+#+end_src
+
+You can also access the archive via normal file access.  Such "local
+archives" are useful for debugging:
+
+#+begin_src elisp
+  (setq package-archives '(("local-elpa" . ".../elpa/archive")))
+#+end_src
+
+** Dependency management using GNU Guix
+If you have the [[https://guix.gnu.org/][GNU Guix]] package manager installed, it can take care
+of all the dependencies necessary for the ELPA build system to run.
+You can initialise a shell session by running
+
+#+begin_src sh
+  guix shell -m manifest.scm
+#+end_src
+
+** Notes specific to =elpa.gnu.org=
+
+*** Periodic builds
+The way things are set up on this machine, we refresh the archive by
+a cron job.  You can do it by hand by logging in (access set up by FSF
+admins), and
+
+#+begin_src shell
+   su - elpa
+   cd elpa
+   make build-all
+#+end_src
+
+Which makes a full archive deployment, as discussed above.  The symlink
+=/var/www/packages= points to the corresponding directory under
+=/home/elpa/=.
+
+*** Release and devel archives
+elpa.gnu.org serves the gnu and nongnu package collections (roughly,
+gnu requires FSF copyright assign, nongnu doesn't, but these terms are
+not fully defined here).
+
+In addition, elpa.gnu.org serves release and devel versions of each
+package. The release version is defined by a change in the =Version:=
+header of a package; the devel version is the latest commit.
+
+The release version is accessed at:
+
+gnu    - https://elpa.gnu.org/packages/
+nongnu - https://elpa.nongnu.org/nongnu/
+
+The devel version is accessed at:
+
+gnu    - https://elpa.gnu.org/devel
+nongnu - https://elpa.nongnu.org/nongnu-devel/
+
+* License
+This file is part of GNU Emacs.
+
+GNU Emacs is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+GNU Emacs is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with GNU Emacs.  If not, see <https://www.gnu.org/licenses/>.
+
+
+#+STARTUP: showall
+#+OPTIONS: num:1
+#+AUTHOR: GNU ELPA Maintainers
+#+EMAIL: emacs-devel@gnu.org
+#+BEGIN_COMMENT
+Local variables:
+mode: org
+paragraph-separate: "[ 	]*$"
+time-stamp-pattern: "4/#\\+DATE: %Y-%02m-%02d$"
+end:
+#+END_COMMENT

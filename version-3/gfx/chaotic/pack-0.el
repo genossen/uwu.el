@@ -4,8 +4,14 @@
 ;; ╚═╝╩╚═╩ ╩╩  ╩ ╩╩╚═╝╚═╝
 ;;     ╔═╗╔═╗╔═╗╦╔═      
 ;;     ╠═╝╠═╣║  ╠╩╗      
-;;     ╩  ╩ ╩╚═╝╩ ╩ 
+;;     ╩  ╩ ╩╚═╝╩ ╩
 
+;; ╔═╗╦ ╦╔═╗╔═╗╔╦╗╦╔═╗   
+;; ║  ╠═╣╠═╣║ ║ ║ ║║     
+;; ╚═╝╩ ╩╩ ╩╚═╝ ╩ ╩╚═╝   
+
+;; pack 0.
+;; first of three. 
 
 ;; ┌─┐┌─┐┌─┐
 ;; ├┤ │ ┬│ ┬
@@ -156,55 +162,30 @@
 
 (defconst +four-hearts+
 "
-     ♥♥♥♥♥♥♥♥
-")
-
-(defconst +three-and-half-hearts+
-"
-     ♥♥♥♥♥♥♥♡
+     ♥♥♥♥
 ")
 
 (defconst +three-hearts+
 "
-     ♥♥♥♥♥♥♡♡
-")
-
-(defconst +two-and-half-hearts+
-"
-     ♥♥♥♥♥♡♡♡
+     ♥♥♥♡
 ")
 
 (defconst +two-hearts+
 "
-     ♥♥♥♥♡♡♡♡
+     ♥♥♡♡
 ")
 
-(defconst +one-and-half-hearts+
-"
-     ♥♥♥♡♡♡♡♡
-")
 
 (defconst +one-heart+
 "
-     ♥♥♡♡♡♡♡♡
+     ♥♡♡♡
 "
 )
 
-(defconst +half-heart+
-"
-     ♥♡♡♡♡♡♡♡
-")
-
 (defconst +zero-hearts+
 "
-     ♡♡♡♡♡♡♡♡
-
-hungry~!
-
-(don't forget to
-   M-x uwu-feed!)
+     ♡♡♡♡
 ")
-
 
 ;; ┌┬┐┌─┐┬┬  ┌─┐┌┬┐┌─┐
 ;;  │ │ │││  ├┤  │ └─┐

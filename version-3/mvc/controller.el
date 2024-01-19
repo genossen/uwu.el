@@ -291,3 +291,5 @@
 
 (defun uwu-attention-flag-down ()
   (setf *attention-flag* nil))
+
+(provide 'uwu-pet-controller)
