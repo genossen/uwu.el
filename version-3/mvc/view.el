@@ -39,9 +39,7 @@
        (cdr pet-gfx)))
      (get-buffer-create "*uwu*"))
 
-    (substring "" (- 10 *movement* (nth
-				    rng-move
-				    (cdr pet-gfx))
+ ;;   (substring "" (- 10 *movement* (nth rng-move (cdr pet-gfx))
     
     (terpri (get-buffer-create "*uwu*"))
         

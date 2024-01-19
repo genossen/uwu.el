@@ -32,7 +32,7 @@
 
 ;;; Code:
 
-;; code goes here
+(
 
 (provide 'uwu)
 ;;; uwu.el ends here
