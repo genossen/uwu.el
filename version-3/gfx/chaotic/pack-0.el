@@ -218,3 +218,5 @@
        ς  ξ  ς  ξ  (don't forget to
        Δ  Δ  Δ  Δ  M-x uwu-clean-up!)
 ")
+
+(provide 'uwu-graphics-v3)

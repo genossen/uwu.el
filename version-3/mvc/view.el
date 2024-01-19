@@ -3,6 +3,7 @@
 ;; ╚╗╔╝║║╣ ║║║╚═╗
 ;;  ╚╝ ╩╚═╝╚╩╝╚═╝
 
+(require 'uwu-graphics-v3)
 (require 'uwu-pet-controller)
 (require 'uwu-pet-model)
 

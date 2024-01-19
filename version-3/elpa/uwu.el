@@ -19,6 +19,14 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+;; -*-
+
+;; ╦ ╦╦ ╦╦ ╦ ╔═╗╦  
+;; ║ ║║║║║ ║ ║╣ ║  
+;; ╚═╝╚╩╝╚═╝o╚═╝╩═╝
+
+;; -*-
+
 ;;; Commentary:
 
 ;; This is a virtual pet for GNU Emacs. You can feed, clean, and play
@@ -32,7 +40,54 @@
 
 ;;; Code:
 
-(
+(load "../gfx/chaotic/pack-0.el")
+(load "../mvc/controller.el")
+(load "../mvc/model.el")
+(load "../mvc/view.el")
+
+(require 'uwu-pet-view)
+
+;; ┌┬┐┌─┐ ┬┌─┐┬─┐ 
+;; │││├─┤ ││ │├┬┘ 
+;; ┴ ┴┴ ┴└┘└─┘┴└─ 
+;; ┌┬┐┌─┐┌┬┐┌─┐   
+;; ││││ │ ││├┤    
+;; ┴ ┴└─┘─┴┘└─┘   
+;; ┌─┐┌─┐┌┬┐┬ ┬┌─┐
+;; └─┐├┤  │ │ │├─┘
+;; └─┘└─┘ ┴ └─┘┴  
+
+(defconst uwu-version "3.0.0"
+  "Current version of uwu.")
+
+(defgroup uwu nil
+  "A virtual pet simulator."
+  :prefix "uwu-"
+  :group 'games)
+
+(defcustom uwu-mode-hook nil
+  "Hook run when entering uwu mode."
+  :type 'hook
+  :group 'uwu)
+
+(define-derived-mode uwu-mode special-mode "uwu"
+  "The major mode of the uwu virtual pet simulator."
+  :group 'uwu)
+
+(defun uwu-mode ()
+  "Major mode for entering the uwu virtual pet simulator."
+  (interactive)
+  (setf major-mode 'uwu-mode)
+  (setf mode-name "uwu")
+  (uwu-init)
+  (uwu-main-loop))
+
+;; ┌─┐┌─┐┌─┐┬┌─┌─┐┌─┐┌─┐
+;; ├─┘├─┤│  ├┴┐├─┤│ ┬├┤ 
+;; ┴  ┴ ┴└─┘┴ ┴┴ ┴└─┘└─┘
+
+;; provide package
 
 (provide 'uwu)
+
 ;;; uwu.el ends here
